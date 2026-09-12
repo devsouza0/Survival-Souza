@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>Survival Souza</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top,#243b2b 0%,#101b14 40%,#070b08 100%);
+    min-height:100vh;
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:420px;
+}
+
+/* LOGO */
+
+.logo{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo-icon{
+    width:90px;
+    height:90px;
+
+    margin:auto;
+    margin-bottom:15px;
+
+    border-radius:25px;
+
+    background:linear-gradient(
+        145deg,
+        #56c271,
+        #1e7138
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:45px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.4),
+        inset 0 1px 1px rgba(255,255,255,.2);
+}
+
+.logo h1{
+    font-size:32px;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:#61d879;
+}
+
+.logo p{
+    color:#95a79a;
+    margin-top:6px;
+    font-size:14px;
+}
+
+/* CARD */
+
+.card{
+    background:rgba(18,28,21,.94);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    padding:25px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+/* TABS */
+
+.tabs{
+    display:flex;
+
+    background:#0d150f;
+
+    padding:5px;
+
+    border-radius:12px;
+
+    margin-bottom:25px;
+}
+
+.tab{
+    width:50%;
+
+    border:none;
+
+    padding:13px;
+
+    border-radius:9px;
+
+    background:transparent;
+
+    color:#849288;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.tab.active{
+    background:#256c3a;
+    color:white;
+}
+
+/* FORM */
+
+.form{
+    display:none;
+}
+
+.form.active{
+    display:block;
+}
+
+.form h2{
+    font-size:21px;
+    margin-bottom:6px;
+}
+
+.subtitle{
+    color:#87958a;
+
+    font-size:13px;
+
+    margin-bottom:22px;
+}
+
+.campo{
+    margin-bottom:15px;
+}
+
+.campo label{
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#acb8af;
+
+    font-size:13px;
+}
+
+.campo input{
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:11px;
+
+    padding:0 15px;
+
+    background:#0b120d;
+
+    border:1px solid #26352a;
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.2s;
+}
+
+.campo input:focus{
+    border-color:#51c86d;
+
+    box-shadow:
+        0 0 0 3px rgba(81,200,109,.1);
+}
+
+.btn{
+    width:100%;
+
+    min-height:52px;
+
+    margin-top:7px;
+
+    border:none;
+
+    border-radius:11px;
+
+    background:linear-gradient(
+        135deg,
+        #35a952,
+        #207337
+    );
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.btn:active{
+    transform:scale(.98);
+}
+
+.btn:disabled{
+    opacity:.6;
+}
+
+/* MENSAGEM */
+
+.mensagem{
+    display:none;
+
+    margin-top:15px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    font-size:13px;
+
+    text-align:center;
+}
+
+.mensagem.erro{
+    display:block;
+
+    background:rgba(220,38,38,.12);
+
+    border:1px solid rgba(239,68,68,.25);
+
+    color:#ff9292;
+}
+
+.mensagem.sucesso{
+    display:block;
+
+    background:rgba(34,197,94,.12);
+
+    border:1px solid rgba(34,197,94,.25);
+
+    color:#83e89a;
+}
+
+/* TELA LOGADO */
+
+#telaJogo{
+    display:none;
+}
+
+.player{
+    text-align:center;
+}
+
+.avatar{
+    width:80px;
+    height:80px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#245f35;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:37px;
+
+    margin-bottom:15px;
+}
+
+.player h2{
+    margin-bottom:5px;
+}
+
+.player-level{
+    color:#72dc87;
+
+    margin-bottom:25px;
+
+    font-size:14px;
+}
+
+/* STATUS */
+
+.status-grid{
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:10px;
+
+    margin-bottom:22px;
+}
+
+.status{
+    background:#0c140e;
+
+    border:1px solid #273329;
+
+    border-radius:12px;
+
+    padding:14px;
+}
+
+.status small{
+    color:#87958a;
+}
+
+.status strong{
+    display:block;
+
+    margin-top:4px;
+
+    font-size:18px;
+}
+
+/* BOTÕES MENU */
+
+.menu-btn{
+    width:100%;
+
+    min-height:54px;
+
+    margin-bottom:10px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    font-size:15px;
+
+    cursor:pointer;
+}
+
+.continuar{
+    background:#2da34b;
+    color:white;
+}
+
+.novo{
+    background:#18251b;
+    color:white;
+
+    border:1px solid #334638;
+}
+
+.sair{
+    background:transparent;
+
+    color:#e57676;
+
+    border:1px solid #5b2929;
+}
+
+/* LOADING */
+
+.loading{
+    display:none;
+
+    text-align:center;
+
+    margin-top:12px;
+
+    font-size:13px;
+
+    color:#819087;
+}
+
+@media(max-width:380px){
+
+    body{
+        padding:14px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .logo h1{
+        font-size:27px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGIN/CADASTRO -->
+
+    <div id="telaAuth">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🌲
+            </div>
+
+            <h1>
+                SURVIVAL
+                <span>SOUZA</span>
+            </h1>
+
+            <p>
+                Construa. Sobreviva. Evolua.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <div class="tabs">
+
+                <button
+                    class="tab active"
+                    id="tabLogin"
+                >
+                    Entrar
+                </button>
+
+                <button
+                    class="tab"
+                    id="tabCadastro"
+                >
+                    Criar conta
+                </button>
+
+            </div>
+
+            <!-- LOGIN -->
+
+            <div
+                id="formLogin"
+                class="form active"
+            >
+
+                <h2>Bem-vindo</h2>
+
+                <p class="subtitle">
+                    Entre para continuar sua sobrevivência.
+                </p>
+
+                <div class="campo">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="seu@email.com"
+                    >
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Senha</label>
+
+                    <input
+                        type="password"
+                        id="loginSenha"
+                        placeholder="Sua senha"
+                    >
+
+                </div>
+
+                <button
+                    class="btn"
+                    id="btnLogin"
+                >
+                    ENTRAR
+                </button>
+
+                <div
+                    id="mensagemLogin"
+                    class="mensagem"
+                ></div>
+
+            </div>
+
+            <!-- CADASTRO -->
+
+            <div
+                id="formCadastro"
+                class="form"
+            >
+
+                <h2>Novo sobrevivente</h2>
+
+                <p class="subtitle">
+                    Crie sua conta para salvar seu progresso.
+                </p>
+
+                <div class="campo">
+
+                    <label>Nome do jogador</label>
+
+                    <input
+                        type="text"
+                        id="cadastroNome"
+                        maxlength="20"
+                        placeholder="Ex: SouzaPlayer"
+                    >
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="cadastroEmail"
+                        placeholder="seu@email.com"
+                    >
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Senha</label>
+
+                    <input
+                        type="password"
+                        id="cadastroSenha"
+                        minlength="6"
+                        placeholder="Mínimo 6 caracteres"
+                    >
+
+                </div>
+
+                <button
+                    class="btn"
+                    id="btnCadastro"
+                >
+                    CRIAR CONTA
+                </button>
+
+                <div
+                    id="mensagemCadastro"
+                    class="mensagem"
+                ></div>
+
+            </div>
+
+            <div
+                class="loading"
+                id="loading"
+            >
+                Carregando...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JOGADOR LOGADO -->
+
+    <div id="telaJogo">
+
+        <div class="logo">
+
+            <h1>
+                SURVIVAL
+                <span>SOUZA</span>
+            </h1>
+
+        </div>
+
+        <div class="card">
+
+            <div class="player">
+
+                <div class="avatar">
+                    🧑
+                </div>
+
+                <h2 id="nomePlayer">
+                    Jogador
+                </h2>
+
+                <div
+                    class="player-level"
+                    id="nivelPlayer"
+                >
+                    Nível 1
+                </div>
+
+            </div>
+
+            <div class="status-grid">
+
+                <div class="status">
+
+                    <small>💰 Dinheiro</small>
+
+                    <strong id="dinheiro">
+                        R$ 100
+                    </strong>
+
+                </div>
+
+                <div class="status">
+
+                    <small>🪵 Madeira</small>
+
+                    <strong id="madeira">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="status">
+
+                    <small>🍖 Comida</small>
+
+                    <strong id="comida">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="status">
+
+                    <small>⭐ XP</small>
+
+                    <strong id="xp">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <button
+                class="menu-btn continuar"
+                id="continuarJogo"
+            >
+                ▶ CONTINUAR JOGO
+            </button>
+
+            <button
+                class="menu-btn novo"
+                id="novoJogo"
+            >
+                ＋ NOVO JOGO
+            </button>
+
+            <button
+                class="menu-btn sair"
+                id="btnSair"
+            >
+                SAIR DA CONTA
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================
+   CONFIGURAÇÃO SUPABASE
+===================================== */
+
+const SUPABASE_URL =
+    "sb_publishable_WZ_fVSJiwmJnrOaZhA2INg_0MtFeWgs";
+
+const SUPABASE_ANON_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50aHNyc25xaWR0eXdxZ2h2Y2FsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyNDM5NDIsImV4cCI6MjEwNDgxOTk0Mn0.yxSU8ePfkU15LuKN0eiUu9RfT1O3AG24mlIyjxcSjUU";
+
+
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =====================================
+   ELEMENTOS
+===================================== */
+
+const telaAuth =
+    document.getElementById("telaAuth");
+
+const telaJogo =
+    document.getElementById("telaJogo");
+
+const tabLogin =
+    document.getElementById("tabLogin");
+
+const tabCadastro =
+    document.getElementById("tabCadastro");
+
+const formLogin =
+    document.getElementById("formLogin");
+
+const formCadastro =
+    document.getElementById("formCadastro");
+
+
+
+/* =====================================
+   TROCAR LOGIN / CADASTRO
+===================================== */
+
+tabLogin.addEventListener("click",()=>{
+
+    tabLogin.classList.add("active");
+
+    tabCadastro.classList.remove("active");
+
+    formLogin.classList.add("active");
+
+    formCadastro.classList.remove("active");
+
+});
+
+
+tabCadastro.addEventListener("click",()=>{
+
+    tabCadastro.classList.add("active");
+
+    tabLogin.classList.remove("active");
+
+    formCadastro.classList.add("active");
+
+    formLogin.classList.remove("active");
+
+});
+
+
+/* =====================================
+   MENSAGENS
+===================================== */
+
+function mensagem(
+    elemento,
+    texto,
+    tipo
+){
+
+    elemento.textContent = texto;
+
+    elemento.className =
+        "mensagem " + tipo;
+
+}
+
+
+/* =====================================
+   CADASTRO
+===================================== */
+
+document
+.getElementById("btnCadastro")
+.addEventListener("click",async()=>{
+
+    const nome =
+        document
+        .getElementById("cadastroNome")
+        .value
+        .trim();
+
+    const email =
+        document
+        .getElementById("cadastroEmail")
+        .value
+        .trim();
+
+    const senha =
+        document
+        .getElementById("cadastroSenha")
+        .value;
+
+    const mensagemCadastro =
+        document
+        .getElementById("mensagemCadastro");
+
+
+    if(
+        !nome ||
+        !email ||
+        !senha
+    ){
+
+        mensagem(
+            mensagemCadastro,
+            "Preencha todos os campos.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    if(senha.length < 6){
+
+        mensagem(
+            mensagemCadastro,
+            "A senha precisa ter pelo menos 6 caracteres.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    const btn =
+        document.getElementById("btnCadastro");
+
+    btn.disabled = true;
+
+    btn.textContent =
+        "CRIANDO CONTA...";
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient.auth.signUp({
+
+        email:email,
+
+        password:senha,
+
+        options:{
+
+            data:{
+                nome_jogador:nome
+            }
+
+        }
+
+    });
+
+
+    btn.disabled = false;
+
+    btn.textContent =
+        "CRIAR CONTA";
+
+
+    if(error){
+
+        mensagem(
+            mensagemCadastro,
+            error.message,
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    if(data.session){
+
+        await carregarJogador();
+
+    }else{
+
+        mensagem(
+            mensagemCadastro,
+            "Conta criada! Verifique seu email para confirmar o cadastro.",
+            "sucesso"
+        );
+
+    }
+
+});
+
+
+/* =====================================
+   LOGIN
+===================================== */
+
+document
+.getElementById("btnLogin")
+.addEventListener("click",async()=>{
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+    const senha =
+        document
+        .getElementById("loginSenha")
+        .value;
+
+    const mensagemLogin =
+        document
+        .getElementById("mensagemLogin");
+
+
+    if(
+        !email ||
+        !senha
+    ){
+
+        mensagem(
+            mensagemLogin,
+            "Digite seu email e senha.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    const btn =
+        document.getElementById("btnLogin");
+
+    btn.disabled = true;
+
+    btn.textContent =
+        "ENTRANDO...";
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient.auth
+        .signInWithPassword({
+
+            email:email,
+
+            password:senha
+
+        });
+
+
+    btn.disabled = false;
+
+    btn.textContent =
+        "ENTRAR";
+
+
+    if(error){
+
+        mensagem(
+            mensagemLogin,
+            "Email ou senha incorretos.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    await carregarJogador();
+
+});
+
+
+/* =====================================
+   CARREGAR PERFIL
+===================================== */
+
+async function carregarJogador(){
+
+    const {
+        data:{
+            user
+        }
+    } =
+    await supabaseClient.auth.getUser();
+
+
+    if(!user){
+
+        telaAuth.style.display =
+            "block";
+
+        telaJogo.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    const {
+        data:perfil,
+        error
+    } =
+    await supabaseClient
+        .from("perfis")
+        .select("*")
+        .eq("id",user.id)
+        .single();
+
+
+    if(error){
+
+        console.error(error);
+
+        return;
+
+    }
+
+
+    document
+    .getElementById("nomePlayer")
+    .textContent =
+        perfil.nome_jogador;
+
+
+    document
+    .getElementById("nivelPlayer")
+    .textContent =
+        "Nível " + perfil.nivel;
+
+
+    document
+    .getElementById("dinheiro")
+    .textContent =
+        "R$ " +
+        Number(perfil.dinheiro)
+        .toLocaleString("pt-BR");
+
+
+    document
+    .getElementById("madeira")
+    .textContent =
+        perfil.madeira;
+
+
+    document
+    .getElementById("comida")
+    .textContent =
+        perfil.comida;
+
+
+    document
+    .getElementById("xp")
+    .textContent =
+        perfil.xp;
+
+
+    telaAuth.style.display =
+        "none";
+
+    telaJogo.style.display =
+        "block";
+
+}
+
+
+/* =====================================
+   CONTINUAR JOGO
+===================================== */
+
+document
+.getElementById("continuarJogo")
+.addEventListener("click",()=>{
+
+    window.location.href =
+        "jogo.html";
+
+});
+
+
+/* =====================================
+   NOVO JOGO
+===================================== */
+
+document
+.getElementById("novoJogo")
+.addEventListener("click",async()=>{
+
+    const {
+        data:{
+            user
+        }
+    } =
+    await supabaseClient.auth.getUser();
+
+
+    if(!user){
+        return;
+    }
+
+
+    const confirmar =
+        confirm(
+            "Deseja começar um novo jogo? Seu progresso atual será apagado."
+        );
+
+
+    if(!confirmar){
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("perfis")
+        .update({
+
+            dinheiro:100,
+            madeira:0,
+            comida:0,
+            nivel:1,
+            xp:0,
+            pos_x:0,
+            pos_y:0,
+            tempo_jogado:0
+
+        })
+        .eq("id",user.id);
+
+
+    if(error){
+
+        alert(
+            "Erro ao reiniciar o jogo."
+        );
+
+        console.error(error);
+
+        return;
+
+    }
+
+
+    await carregarJogador();
+
+    alert(
+        "Novo jogo criado!"
+    );
+
+});
+
+
+/* =====================================
+   SAIR
+===================================== */
+
+document
+.getElementById("btnSair")
+.addEventListener("click",async()=>{
+
+    await supabaseClient.auth.signOut();
+
+    location.reload();
+
+});
+
+
+/* =====================================
+   VERIFICAR LOGIN AUTOMATICAMENTE
+===================================== */
+
+async function iniciar(){
+
+    const {
+        data:{
+            session
+        }
+    } =
+    await supabaseClient.auth.getSession();
+
+
+    if(session){
+
+        await carregarJogador();
+
+    }
+
+}
+
+
+iniciar();
+
+</script>
+
+</body>
+</html>
