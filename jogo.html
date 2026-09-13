@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -12,6 +13,10 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
     margin:0;
     padding:0;
@@ -19,1071 +24,2789 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+:root{
+    --dark:#111712;
+    --dark2:#19201a;
+    --dark3:#222b23;
+
+    --green:#3f763c;
+    --green2:#315f35;
+
+    --orange:#f39a22;
+    --orange2:#c96b0a;
+
+    --text:#f6f6f6;
+    --muted:#adb8af;
+}
+
+html,
+body{
+
     width:100%;
     height:100%;
+
     overflow:hidden;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#101410;
+
+    font-family:
+    Inter,
+    Arial,
+    Helvetica,
+    sans-serif;
+
+    background:#111;
+
     color:white;
+
     touch-action:none;
+
 }
 
 button{
     font-family:inherit;
+    cursor:pointer;
 }
+
+/* =====================================================
+   GAME
+===================================================== */
 
 #game{
+
     position:relative;
+
     width:100%;
     height:100%;
+
     overflow:hidden;
-    background:#456f37;
+
+    background:#1c271c;
+
 }
+
+/* =====================================================
+   WORLD
+===================================================== */
 
 #world{
+
     position:absolute;
+
     width:2600px;
     height:2600px;
+
     left:0;
     top:0;
+
     background:
-    radial-gradient(circle at 20% 20%,rgba(255,255,255,.04),transparent 20%),
-    radial-gradient(circle at 70% 60%,rgba(0,0,0,.09),transparent 28%),
-    #4d7d3d;
+
+    radial-gradient(
+        circle at 20% 20%,
+        rgba(255,255,255,.05),
+        transparent 25%
+    ),
+
+    radial-gradient(
+        circle at 70% 70%,
+        rgba(0,0,0,.10),
+        transparent 28%
+    ),
+
+    repeating-linear-gradient(
+        12deg,
+        transparent 0px,
+        transparent 22px,
+        rgba(255,255,255,.018) 23px,
+        rgba(255,255,255,.018) 24px
+    ),
+
+    #467b3e;
+
 }
+
+/* =====================================================
+   BASE AREA
+===================================================== */
+
+#baseArea{
+
+    position:absolute;
+
+    width:780px;
+    height:600px;
+
+    left:910px;
+    top:1000px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+        ellipse,
+        rgba(114,153,79,.46),
+        rgba(77,122,61,.14) 60%,
+        transparent 72%
+    );
+
+    z-index:1;
+
+    pointer-events:none;
+
+}
+
+/* =====================================================
+   PATHS
+===================================================== */
 
 .path{
+
     position:absolute;
+
+    z-index:2;
+
     background:
+
     repeating-linear-gradient(
         90deg,
-        #99764b 0px,
-        #99764b 18px,
-        #a98555 18px,
-        #a98555 36px
+        #a9875d 0px,
+        #a9875d 18px,
+        #99764e 18px,
+        #99764e 36px
     );
-    opacity:.9;
-    border-radius:40px;
-    box-shadow:inset 0 0 20px rgba(0,0,0,.18);
-    z-index:1;
+
+    box-shadow:
+
+    inset 0 4px 10px rgba(255,255,255,.07),
+    inset 0 -5px 10px rgba(0,0,0,.14);
+
 }
 
-.path.horizontal{
-    width:1100px;
+.path.main-horizontal{
+
+    left:580px;
+    top:1270px;
+
+    width:1450px;
     height:90px;
-    left:760px;
-    top:1250px;
+
+    border-radius:45px;
+
 }
 
-.path.vertical{
+.path.main-vertical{
+
+    left:1260px;
+    top:620px;
+
     width:90px;
-    height:1100px;
-    left:1250px;
-    top:760px;
+    height:1400px;
+
+    border-radius:45px;
+
 }
 
-#lockedArea{
-    position:absolute;
-    left:1750px;
-    top:350px;
-    width:600px;
-    height:700px;
-    border:5px dashed rgba(255,188,72,.9);
-    background:
-    repeating-linear-gradient(
-        45deg,
-        rgba(38,45,39,.88) 0px,
-        rgba(38,45,39,.88) 20px,
-        rgba(47,54,47,.9) 20px,
-        rgba(47,54,47,.9) 40px
-    );
-    z-index:18;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    border-radius:20px;
-    box-shadow:0 20px 35px rgba(0,0,0,.3);
+.path.hut-path{
+
+    left:1300px;
+    top:1320px;
+
+    width:280px;
+    height:65px;
+
+    transform:rotate(-14deg);
+
+    border-radius:40px;
+
 }
 
-.lockedBox{
-    background:rgba(12,15,12,.92);
-    padding:24px;
-    border-radius:16px;
-    border:1px solid #5d664f;
-    width:260px;
+.path.lumber-path{
+
+    left:1450px;
+    top:1130px;
+
+    width:340px;
+    height:60px;
+
+    transform:rotate(-22deg);
+
+    border-radius:40px;
+
 }
 
-.lockedBox h2{
-    color:#ffb53f;
-    margin-bottom:10px;
+.path.quarry-path{
+
+    left:820px;
+    top:1450px;
+
+    width:420px;
+    height:60px;
+
+    transform:rotate(-17deg);
+
+    border-radius:40px;
+
 }
 
-.lockedBox p{
-    font-size:13px;
-    line-height:1.5;
-}
-
-.lockedBox button{
-    width:100%;
-    margin-top:14px;
-    min-height:45px;
-    border:none;
-    border-radius:10px;
-    color:white;
-    font-weight:bold;
-    background:#d48711;
-}
+/* =====================================================
+   DECORATIVE GRASS
+===================================================== */
 
 .grass{
+
     position:absolute;
-    width:14px;
-    height:8px;
-    border-radius:50% 50% 0 0;
-    background:#2d5d2d;
-    opacity:.5;
-    z-index:2;
+
+    width:19px;
+    height:13px;
+
+    z-index:3;
+
 }
+
+.grass::before,
+.grass::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:0;
+
+    width:5px;
+    height:14px;
+
+    border-radius:100% 0;
+
+    background:#27592e;
+
+}
+
+.grass::before{
+    left:4px;
+    transform:rotate(-25deg);
+}
+
+.grass::after{
+    right:4px;
+    transform:rotate(25deg);
+}
+
+/* =====================================================
+   BUSH
+===================================================== */
 
 .bush{
-    position:absolute;
-    width:38px;
-    height:28px;
-    background:#256530;
-    border-radius:50%;
-    box-shadow:
-        12px 2px 0 #32773a,
-        5px -7px 0 #3c8845;
-    z-index:4;
-}
 
-#player{
     position:absolute;
+
     width:46px;
-    height:46px;
+    height:35px;
+
     border-radius:50%;
-    background:#e7b06d;
-    border:4px solid #1e2c1c;
-    box-shadow:0 9px 14px rgba(0,0,0,.38);
-    z-index:30;
+
+    background:#286932;
+
+    z-index:5;
+
+    box-shadow:
+
+    15px 3px 0 #347a3c,
+    8px -10px 0 #3e8845,
+    0 8px 12px rgba(0,0,0,.20);
+
 }
 
-#player::before{
-    content:"";
-    position:absolute;
-    width:28px;
-    height:16px;
-    left:5px;
-    top:-10px;
-    border-radius:15px 15px 5px 5px;
-    background:#315f38;
-}
-
-#player::after{
-    content:"";
-    position:absolute;
-    left:7px;
-    bottom:-12px;
-    width:24px;
-    height:8px;
-    background:rgba(0,0,0,.28);
-    border-radius:50%;
-}
+/* =====================================================
+   TREES
+===================================================== */
 
 .tree{
+
     position:absolute;
-    width:88px;
-    height:118px;
+
+    width:100px;
+    height:130px;
+
     z-index:10;
-    transition:opacity .25s,transform .25s,filter .2s;
+
+    transform-origin:center bottom;
+
+    transition:
+    transform .2s,
+    opacity .25s,
+    filter .2s;
+
 }
 
 .tree-shadow{
+
     position:absolute;
-    width:70px;
-    height:20px;
-    left:10px;
-    bottom:-3px;
+
+    bottom:1px;
+    left:12px;
+
+    width:76px;
+    height:25px;
+
     border-radius:50%;
-    background:rgba(0,0,0,.22);
-    filter:blur(3px);
+
+    background:rgba(0,0,0,.24);
+
+    filter:blur(4px);
+
 }
 
 .tree-trunk{
+
     position:absolute;
-    left:34px;
-    bottom:5px;
-    width:20px;
+
+    bottom:11px;
+    left:39px;
+
+    width:22px;
     height:48px;
-    border-radius:5px;
-    background:linear-gradient(90deg,#5b3418,#9a6530,#68401f);
+
+    border-radius:4px;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #593519,
+        #a86b32,
+        #68401f
+    );
+
+    box-shadow:
+    inset 3px 0 rgba(255,255,255,.08);
+
 }
 
 .tree-layer{
+
     position:absolute;
+
     left:50%;
+
     transform:translateX(-50%);
+
     width:0;
     height:0;
-    filter:drop-shadow(0 5px 3px rgba(0,0,0,.20));
+
+    filter:
+    drop-shadow(0 6px 3px rgba(0,0,0,.18));
+
 }
 
 .tree-layer.one{
+
     top:0;
+
     border-left:30px solid transparent;
     border-right:30px solid transparent;
-    border-bottom:50px solid #3e8a44;
+
+    border-bottom:55px solid #4c9b50;
+
 }
 
 .tree-layer.two{
+
     top:22px;
-    border-left:39px solid transparent;
-    border-right:39px solid transparent;
-    border-bottom:60px solid #2c7437;
+
+    border-left:40px solid transparent;
+    border-right:40px solid transparent;
+
+    border-bottom:67px solid #347e3c;
+
 }
 
 .tree-layer.three{
-    top:47px;
-    border-left:45px solid transparent;
-    border-right:45px solid transparent;
-    border-bottom:65px solid #1e5d2d;
+
+    top:53px;
+
+    border-left:48px solid transparent;
+    border-right:48px solid transparent;
+
+    border-bottom:70px solid #23652f;
+
 }
 
 .tree.near{
-    filter:drop-shadow(0 0 8px rgba(255,214,61,.9));
+
+    filter:
+    drop-shadow(
+        0 0 12px rgba(255,219,72,.95)
+    );
+
+    transform:scale(1.05);
+
 }
 
+/* =====================================================
+   ROCKS
+===================================================== */
+
 .rock{
+
     position:absolute;
-    width:62px;
-    height:50px;
-    border-radius:42% 55% 35% 50%;
-    background:linear-gradient(145deg,#aab1b3,#666d70);
-    box-shadow:
-        inset -9px -8px 0 rgba(0,0,0,.14),
-        0 9px 12px rgba(0,0,0,.25);
+
+    width:70px;
+    height:56px;
+
     z-index:9;
-    transition:opacity .25s,transform .25s,filter .2s;
+
+    border-radius:
+    48% 42% 46% 36%;
+
+    background:
+
+    linear-gradient(
+        140deg,
+        #b8c0c0,
+        #838b8d 48%,
+        #545b5e
+    );
+
+    box-shadow:
+
+    inset -8px -8px 0 rgba(0,0,0,.13),
+    0 10px 14px rgba(0,0,0,.25);
+
+    transition:
+    filter .2s,
+    transform .2s;
+
+}
+
+.rock::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:25px;
+    height:12px;
+
+    left:10px;
+    top:9px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,.20);
+
 }
 
 .rock.near{
-    filter:drop-shadow(0 0 8px rgba(255,214,61,.9));
+
+    filter:
+    drop-shadow(
+        0 0 12px rgba(255,219,72,.95)
+    );
+
+    transform:scale(1.07);
+
 }
 
-.hut{
+/* =====================================================
+   PLAYER
+===================================================== */
+
+#player{
+
     position:absolute;
-    width:145px;
-    height:110px;
-    background:linear-gradient(90deg,#80502b,#a56a36);
-    border:4px solid #51351f;
-    border-radius:6px 6px 14px 14px;
-    box-shadow:0 14px 20px rgba(0,0,0,.38);
-    z-index:15;
+
+    width:48px;
+    height:55px;
+
+    z-index:40;
+
+    border-radius:
+    45% 45% 35% 35%;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #4a7950 0 46%,
+        #293c2f 46% 100%
+    );
+
+    border:
+    3px solid #17231a;
+
+    box-shadow:
+    0 10px 14px rgba(0,0,0,.35);
+
+}
+
+#player::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:30px;
+    height:30px;
+
+    left:6px;
+    top:-17px;
+
+    border-radius:50%;
+
+    background:#e2a96e;
+
+    border:3px solid #1f2b21;
+
+}
+
+#player::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:30px;
+    height:13px;
+
+    left:6px;
+    top:-19px;
+
+    border-radius:
+    15px 15px 4px 4px;
+
+    background:#263e2b;
+
+}
+
+/* =====================================================
+   CABANA
+===================================================== */
+
+.hut{
+
+    position:absolute;
+
+    width:180px;
+    height:130px;
+
+    z-index:20;
+
+    border-radius:
+    8px 8px 16px 16px;
+
+    background:
+
+    repeating-linear-gradient(
+        90deg,
+        #86552f 0px,
+        #86552f 18px,
+        #754625 18px,
+        #754625 21px
+    );
+
+    border:
+    5px solid #50311e;
+
+    box-shadow:
+
+    0 18px 25px rgba(0,0,0,.33);
+
+}
+
+.hut::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:25px;
+    right:25px;
+
+    bottom:-18px;
+
+    height:20px;
+
+    border-radius:50%;
+
+    background:
+    rgba(0,0,0,.18);
+
+    filter:blur(5px);
+
+    z-index:-1;
+
 }
 
 .hut-roof{
+
     position:absolute;
-    left:-16px;
-    top:-52px;
+
+    left:-23px;
+    top:-72px;
+
     width:0;
     height:0;
-    border-left:85px solid transparent;
-    border-right:85px solid transparent;
-    border-bottom:66px solid #d19755;
+
+    border-left:
+    108px solid transparent;
+
+    border-right:
+    108px solid transparent;
+
+    border-bottom:
+    88px solid #bd7137;
+
+    filter:
+    drop-shadow(
+        0 6px 4px rgba(0,0,0,.23)
+    );
+
+}
+
+.hut-roof::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:-95px;
+    top:8px;
+
+    width:190px;
+    height:10px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    transform:rotate(-1deg);
+
 }
 
 .hut-door{
+
     position:absolute;
-    width:34px;
-    height:58px;
-    left:52px;
+
+    left:68px;
     bottom:0;
-    border-radius:6px 6px 0 0;
-    background:#3b271b;
+
+    width:44px;
+    height:75px;
+
+    border-radius:
+    7px 7px 0 0;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #3a2518,
+        #5c3821
+    );
+
+    border:
+    3px solid #362116;
+
+}
+
+.hut-door::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:6px;
+    top:35px;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#e6b553;
+
 }
 
 .hut-window{
+
     position:absolute;
-    width:30px;
-    height:26px;
-    right:14px;
-    top:30px;
-    border:4px solid #4e311e;
-    background:#ffc95d;
+
+    width:36px;
+    height:32px;
+
+    right:18px;
+    top:36px;
+
+    border:
+    5px solid #51321e;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ffd775,
+        #e69732
+    );
+
+    box-shadow:
+    0 0 12px rgba(255,180,56,.40);
+
+}
+
+.hut-window::before,
+.hut-window::after{
+
+    content:"";
+
+    position:absolute;
+
+    background:#59351f;
+
+}
+
+.hut-window::before{
+
+    width:3px;
+    height:100%;
+
+    left:50%;
+
+}
+
+.hut-window::after{
+
+    width:100%;
+    height:3px;
+
+    top:50%;
+
+}
+
+.chimney{
+
+    position:absolute;
+
+    width:26px;
+    height:55px;
+
+    right:28px;
+    top:-53px;
+
+    background:#584336;
+
+    border:
+    3px solid #3b2c23;
+
+    z-index:-1;
+
+}
+
+.smoke{
+
+    position:absolute;
+
+    right:16px;
+    top:-95px;
+
+    font-size:30px;
+
+    opacity:.65;
+
 }
 
 .hut-level,
 .building-label{
+
     position:absolute;
+
     left:50%;
-    top:-45px;
-    transform:translateX(-50%);
-    background:rgba(11,15,12,.94);
-    border:1px solid #3d493f;
-    padding:7px 11px;
-    border-radius:10px;
-    font-size:11px;
+
+    transform:
+    translateX(-50%);
+
     white-space:nowrap;
+
+    padding:
+    8px 13px;
+
+    border-radius:
+    12px;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    background:
+    rgba(13,18,14,.94);
+
+    border:
+    1px solid rgba(255,255,255,.13);
+
+    box-shadow:
+    0 7px 15px rgba(0,0,0,.28);
+
 }
 
-.hut .hut-level{
-    top:-88px;
+.hut-level{
+    top:-115px;
 }
+
+/* =====================================================
+   SERRARIA
+===================================================== */
 
 .lumberMill{
+
     position:absolute;
-    width:155px;
-    height:110px;
-    background:#79502d;
-    border:4px solid #4c321f;
-    border-radius:12px;
-    z-index:15;
-    box-shadow:0 14px 20px rgba(0,0,0,.35);
+
+    width:185px;
+    height:135px;
+
+    z-index:20;
+
+    border-radius:15px;
+
+    background:
+
+    repeating-linear-gradient(
+        90deg,
+        #6f482a 0,
+        #6f482a 20px,
+        #805532 20px,
+        #805532 23px
+    );
+
+    border:
+    5px solid #49301f;
+
+    box-shadow:
+    0 18px 25px rgba(0,0,0,.33);
+
 }
 
 .lumberMill::before{
-    content:"🪵";
+
+    content:"";
+
     position:absolute;
-    font-size:62px;
-    left:42px;
-    top:15px;
+
+    left:-18px;
+    top:-43px;
+
+    width:205px;
+    height:55px;
+
+    background:#995c30;
+
+    transform:
+    skew(-22deg);
+
+    border:
+    4px solid #59371f;
+
 }
 
-.quarry{
+.lumberMill::after{
+
+    content:"🪵";
+
     position:absolute;
-    width:155px;
-    height:110px;
-    background:#5f6668;
-    border:4px solid #353a3c;
-    border-radius:12px;
-    z-index:15;
-    box-shadow:0 14px 20px rgba(0,0,0,.35);
+
+    left:58px;
+    top:35px;
+
+    font-size:64px;
+
+}
+
+.lumberMill .building-label{
+    top:-83px;
+}
+
+/* =====================================================
+   PEDREIRA
+===================================================== */
+
+.quarry{
+
+    position:absolute;
+
+    width:185px;
+    height:135px;
+
+    z-index:20;
+
+    border-radius:20px;
+
+    border:
+    5px solid #42494b;
+
+    background:
+
+    radial-gradient(
+        circle at 25% 30%,
+        #a9b1b2,
+        transparent 22%
+    ),
+
+    linear-gradient(
+        145deg,
+        #777f82,
+        #52595b
+    );
+
+    box-shadow:
+    0 18px 25px rgba(0,0,0,.34);
+
 }
 
 .quarry::before{
+
     content:"⛏️";
+
     position:absolute;
-    font-size:62px;
-    left:42px;
-    top:15px;
+
+    left:59px;
+    top:30px;
+
+    font-size:65px;
+
 }
 
-#topbar{
+.quarry::after{
+
+    content:"";
+
     position:absolute;
+
+    left:-25px;
+    bottom:-15px;
+
+    width:230px;
+    height:35px;
+
+    background:
+    rgba(0,0,0,.16);
+
+    border-radius:50%;
+
+    filter:blur(5px);
+
+    z-index:-1;
+
+}
+
+.quarry .building-label{
+    top:-50px;
+}
+
+/* =====================================================
+   LOCKED AREA
+===================================================== */
+
+#lockedArea{
+
+    position:absolute;
+
+    left:1820px;
+    top:370px;
+
+    width:550px;
+    height:650px;
+
+    z-index:18;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:30px;
+
+    border:
+    5px dashed #f2a440;
+
+    background:
+
+    repeating-linear-gradient(
+        45deg,
+        rgba(30,35,31,.88) 0,
+        rgba(30,35,31,.88) 25px,
+        rgba(40,46,41,.90) 25px,
+        rgba(40,46,41,.90) 50px
+    );
+
+    box-shadow:
+    0 20px 30px rgba(0,0,0,.25);
+
+}
+
+.lockedBox{
+
+    width:280px;
+
+    padding:25px;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    background:
+    rgba(13,17,14,.95);
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+}
+
+.lockIcon{
+
+    font-size:48px;
+
+    margin-bottom:10px;
+
+}
+
+.lockedBox h2{
+
+    color:#ffb34a;
+
+    margin-bottom:10px;
+
+}
+
+.lockedBox p{
+
+    color:#c5cec6;
+
+    font-size:12px;
+
+    line-height:1.6;
+
+}
+
+.lockedBox button{
+
+    width:100%;
+
+    min-height:48px;
+
+    margin-top:15px;
+
+    border:0;
+
+    border-radius:12px;
+
+    font-weight:900;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        180deg,
+        #f6a82e,
+        #c86d0c
+    );
+
+}
+
+/* =====================================================
+   TOP HUD
+===================================================== */
+
+#topbar{
+
+    position:absolute;
+
     top:0;
     left:0;
     right:0;
-    z-index:300;
+
+    z-index:400;
+
+    height:76px;
+
     display:flex;
+
     align-items:center;
-    gap:7px;
-    padding:9px;
+
+    gap:8px;
+
+    padding:
+    10px 12px;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        rgba(10,14,11,.98),
+        rgba(15,20,16,.91)
+    );
+
+    border-bottom:
+    1px solid rgba(255,255,255,.09);
+
+    box-shadow:
+    0 7px 25px rgba(0,0,0,.35);
+
     overflow-x:auto;
-    background:linear-gradient(180deg,rgba(9,12,10,.98),rgba(9,12,10,.87));
-    border-bottom:1px solid rgba(255,255,255,.10);
+
 }
 
 .logo{
-    min-width:130px;
-    font-weight:900;
-    color:#ffa126;
-    font-size:16px;
+
+    min-width:145px;
+
+    font-weight:1000;
+
+    font-size:15px;
+
+    letter-spacing:.8px;
+
+    color:#ff9f29;
+
+}
+
+.logo small{
+
+    display:block;
+
+    margin-top:2px;
+
+    font-size:8px;
+
+    color:#809184;
+
+    letter-spacing:1.5px;
+
 }
 
 .stat{
-    min-width:92px;
-    background:#151b16;
-    border:1px solid #2e3930;
+
+    min-width:90px;
+
+    padding:
+    7px 9px;
+
     border-radius:12px;
-    padding:7px 9px;
-    font-size:10px;
-    color:#c9d0ca;
+
+    border:
+    1px solid #2c382e;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #1d251f,
+        #141a15
+    );
+
+    font-size:9px;
+
+    color:#9daa9e;
+
 }
 
 .stat strong{
+
     display:block;
+
+    margin-top:2px;
+
+    font-size:13px;
+
     color:white;
-    font-size:14px;
-    margin-top:3px;
+
 }
 
 #playerCard{
+
     min-width:180px;
-    background:#151b16;
-    border:1px solid #2e3930;
+
+    padding:
+    7px 10px;
+
     border-radius:12px;
-    padding:7px 10px;
+
+    border:
+    1px solid #2c382e;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #1d251f,
+        #141a15
+    );
+
+}
+
+#playerCard strong{
+
+    font-size:12px;
+
+}
+
+.progressText{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:5px;
+
+    font-size:8px;
+
+    color:#a5afa7;
+
 }
 
 .xpbar,
 .hungerbar{
+
     width:100%;
-    height:7px;
-    margin-top:5px;
-    border-radius:20px;
+
+    height:6px;
+
     overflow:hidden;
-    background:#303531;
+
+    border-radius:20px;
+
+    background:#313934;
+
 }
 
 #xpfill{
+
     height:100%;
-    width:20%;
-    background:linear-gradient(90deg,#34d66c,#8eec78);
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #34d56b,
+        #8aed7b
+    );
+
 }
 
 #hungerfill{
+
     height:100%;
-    width:100%;
-    background:linear-gradient(90deg,#ef8e26,#f4d34c);
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #e98229,
+        #f2cf3d
+    );
+
 }
 
+/* =====================================================
+   MISSIONS
+===================================================== */
+
 #missions{
+
     position:absolute;
-    left:12px;
-    top:82px;
+
+    top:92px;
+    left:14px;
+
+    z-index:320;
+
     width:235px;
-    z-index:210;
-    padding:12px;
-    border-radius:14px;
-    background:rgba(15,19,16,.92);
-    border:1px solid #39453a;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    border:
+    1px solid rgba(255,255,255,.11);
+
+    background:
+    rgba(14,19,15,.93);
+
+    box-shadow:
+    0 12px 30px rgba(0,0,0,.35);
+
+    backdrop-filter:blur(9px);
+
+}
+
+#missions h3{
+
+    margin-bottom:10px;
+
+    font-size:13px;
+
+    color:#ffd276;
+
 }
 
 .mission{
-    padding:6px 0;
-    font-size:11px;
+
+    padding:7px 0;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.06);
+
+    font-size:10px;
+
+    color:#d4dbd5;
+
+}
+
+.mission:last-child{
+    border-bottom:0;
 }
 
 .mission span{
+
     float:right;
-    color:#83df8e;
+
+    color:#84df8b;
+
+    font-weight:800;
+
 }
 
+/* =====================================================
+   MINI MAP
+===================================================== */
+
 #miniMap{
+
     position:absolute;
-    right:12px;
-    top:82px;
-    width:125px;
-    height:125px;
-    z-index:220;
+
+    top:90px;
+    right:14px;
+
+    width:128px;
+    height:128px;
+
+    z-index:330;
+
+    padding:5px;
+
     border-radius:50%;
-    overflow:hidden;
-    background:#294f2d;
-    border:4px solid rgba(15,18,16,.9);
+
+    background:
+    #101511;
+
+    border:
+    2px solid #5c685e;
+
+    box-shadow:
+    0 12px 25px rgba(0,0,0,.4);
+
 }
 
 #miniMapInner{
+
     position:relative;
+
     width:100%;
     height:100%;
-    background:#3e7139;
+
+    overflow:hidden;
+
+    border-radius:50%;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        transparent 47%,
+        #9d8059 47%,
+        #9d8059 53%,
+        transparent 53%
+    ),
+
+    linear-gradient(
+        transparent 47%,
+        #9d8059 47%,
+        #9d8059 53%,
+        transparent 53%
+    ),
+
+    #426f3d;
+
 }
 
 #miniPlayer{
+
     position:absolute;
-    width:8px;
-    height:8px;
+
+    width:10px;
+    height:10px;
+
     border-radius:50%;
-    background:#fff;
-    border:2px solid #111;
-    transform:translate(-50%,-50%);
+
+    background:white;
+
+    border:
+    2px solid #161616;
+
+    transform:
+    translate(-50%,-50%);
+
+    box-shadow:
+    0 0 8px white;
+
 }
 
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
 #sideMenu{
+
     position:absolute;
-    right:12px;
-    top:220px;
-    z-index:230;
-    width:108px;
+
+    top:235px;
+    right:14px;
+
+    z-index:330;
+
+    width:115px;
+
     display:flex;
+
     flex-direction:column;
+
     gap:7px;
+
 }
 
 .sideBtn{
-    min-height:48px;
-    border-radius:11px;
-    border:1px solid #354137;
-    background:rgba(19,25,20,.95);
+
+    min-height:47px;
+
+    border-radius:13px;
+
+    border:
+    1px solid #354137;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        rgba(32,42,34,.97),
+        rgba(20,27,22,.97)
+    );
+
     color:white;
-    font-size:11px;
-    font-weight:bold;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    box-shadow:
+    0 8px 17px rgba(0,0,0,.27);
+
+    transition:
+    transform .12s,
+    border .12s;
+
+}
+
+.sideBtn:active{
+
+    transform:
+    scale(.96);
+
 }
 
 .sideBtn.upgrade{
-    background:linear-gradient(180deg,#e89a12,#a86004);
-    border-color:#ffc653;
+
+    border:
+    1px solid #e4a145;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #d98918,
+        #985309
+    );
+
 }
+
+/* =====================================================
+   NEAR INFO
+===================================================== */
 
 #nearInfo{
+
     position:absolute;
+
     left:50%;
-    top:95px;
-    transform:translateX(-50%);
-    z-index:240;
+    top:92px;
+
+    transform:
+    translateX(-50%);
+
     display:none;
-    background:rgba(12,16,13,.92);
-    border:1px solid #3e4d40;
-    padding:9px 14px;
-    border-radius:12px;
-    font-size:12px;
+
+    z-index:350;
+
+    padding:
+    9px 14px;
+
+    border-radius:20px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    background:
+    rgba(12,16,13,.92);
+
+    border:
+    1px solid #526056;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,.30);
+
 }
 
+/* =====================================================
+   JOYSTICK
+===================================================== */
+
 #joystickBase{
+
     position:absolute;
-    left:20px;
-    bottom:25px;
-    width:135px;
-    height:135px;
+
+    left:24px;
+    bottom:27px;
+
+    z-index:350;
+
+    width:138px;
+    height:138px;
+
     border-radius:50%;
-    background:rgba(10,10,10,.34);
-    border:2px solid rgba(255,255,255,.18);
-    z-index:250;
+
+    background:
+    rgba(12,16,13,.42);
+
+    border:
+    2px solid rgba(255,255,255,.18);
+
+    box-shadow:
+    inset 0 0 22px rgba(0,0,0,.24);
+
+}
+
+#joystickBase::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:23px;
+    top:23px;
+
+    width:88px;
+    height:88px;
+
+    border-radius:50%;
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
 }
 
 #joystickKnob{
+
     position:absolute;
+
+    left:37px;
+    top:37px;
+
     width:60px;
     height:60px;
-    left:36px;
-    top:36px;
+
     border-radius:50%;
-    background:rgba(255,255,255,.35);
+
+    background:
+
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,.42),
+        rgba(255,255,255,.21)
+    );
+
+    border:
+    1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+    0 7px 16px rgba(0,0,0,.30);
+
 }
+
+/* =====================================================
+   COLLECT BUTTON
+===================================================== */
 
 #collect{
+
     position:absolute;
-    right:25px;
-    bottom:25px;
-    width:105px;
-    height:105px;
+
+    right:27px;
+    bottom:27px;
+
+    z-index:350;
+
+    width:110px;
+    height:110px;
+
     border-radius:50%;
-    border:4px solid rgba(255,255,255,.18);
-    background:rgba(17,21,18,.94);
+
+    border:
+    4px solid rgba(255,255,255,.16);
+
     color:white;
-    font-weight:900;
-    font-size:12px;
-    z-index:250;
+
+    font-weight:1000;
+
+    font-size:11px;
+
+    background:
+
+    radial-gradient(
+        circle at 35% 25%,
+        #4d5f50,
+        #182019 68%
+    );
+
+    box-shadow:
+
+    0 13px 26px rgba(0,0,0,.45),
+    inset 0 0 20px rgba(255,255,255,.04);
+
 }
 
+#collect span{
+
+    display:block;
+
+    font-size:25px;
+
+    margin-bottom:4px;
+
+}
+
+#collect:active{
+
+    transform:
+    scale(.94);
+
+}
+
+/* =====================================================
+   PANELS
+===================================================== */
+
 .panel{
-    display:none;
+
     position:absolute;
+
     left:50%;
     top:50%;
-    transform:translate(-50%,-50%);
-    width:90%;
-    max-width:410px;
-    max-height:80vh;
+
+    transform:
+    translate(-50%,-50%);
+
+    display:none;
+
+    z-index:700;
+
+    width:92%;
+    max-width:430px;
+
+    max-height:82vh;
+
     overflow:auto;
-    z-index:600;
-    padding:19px;
-    border-radius:18px;
-    background:#121713;
-    border:1px solid #3b473d;
+
+    touch-action:pan-y;
+
+    padding:20px;
+
+    border-radius:22px;
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+    background:
+
+    linear-gradient(
+        180deg,
+        rgba(27,35,29,.99),
+        rgba(13,18,14,.99)
+    );
+
+    box-shadow:
+    0 35px 90px rgba(0,0,0,.7);
+
 }
 
 .panel.show{
     display:block;
 }
 
+.panel h2{
+
+    margin-bottom:16px;
+
+    font-size:19px;
+
+    color:#fff;
+
+}
+
 .card{
-    background:#0d120e;
-    border:1px solid #2f3931;
-    border-radius:13px;
-    padding:14px;
-    margin-bottom:10px;
-    font-size:13px;
-    line-height:1.55;
+
+    position:relative;
+
+    margin-bottom:12px;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    border:
+    1px solid #303d32;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #131a15,
+        #0c110d
+    );
+
+    font-size:12px;
+
+    line-height:1.65;
+
+}
+
+.card strong{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    font-size:14px;
+
+}
+
+.card .price{
+
+    display:inline-block;
+
+    margin-top:7px;
+
+    color:#f6bf62;
+
+    font-weight:800;
+
 }
 
 .panelBtn{
+
     width:100%;
-    min-height:46px;
-    border:none;
-    border-radius:10px;
-    margin-top:10px;
+
+    min-height:47px;
+
+    margin-top:11px;
+
+    border:0;
+
+    border-radius:12px;
+
     color:white;
-    background:#288d46;
-    font-weight:bold;
+
+    font-weight:900;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #34a052,
+        #22723a
+    );
+
+    box-shadow:
+    0 7px 15px rgba(0,0,0,.23);
+
 }
 
 .panelBtn.orange{
-    background:#c87b09;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #f2a32d,
+        #b65f09
+    );
+
 }
 
 .panelBtn.dark{
-    background:#272e28;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #313a32,
+        #222923
+    );
+
 }
 
+.panelBtn:active{
+
+    transform:
+    scale(.98);
+
+}
+
+/* =====================================================
+   INVENTORY
+===================================================== */
+
 .inventory-grid{
+
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:9px;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:10px;
+
 }
 
 .inventory-item{
-    background:#0c110d;
-    border:1px solid #303a31;
-    border-radius:12px;
-    padding:12px;
+
+    padding:14px;
+
+    border-radius:14px;
+
     text-align:center;
+
+    border:
+    1px solid #303b32;
+
+    background:#0e140f;
+
 }
 
+.inventory-item .inventoryIcon{
+
+    display:block;
+
+    font-size:30px;
+
+    margin-bottom:5px;
+
+}
+
+.inventory-item strong{
+
+    margin-top:5px;
+
+    font-size:17px;
+
+}
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
 #message{
+
     position:absolute;
+
     left:50%;
-    bottom:155px;
-    transform:translateX(-50%);
-    z-index:900;
+    bottom:160px;
+
+    transform:
+    translateX(-50%)
+    translateY(10px);
+
+    z-index:1000;
+
     opacity:0;
+
     pointer-events:none;
-    background:rgba(0,0,0,.85);
-    padding:10px 15px;
-    border-radius:10px;
-    font-size:12px;
-    transition:.2s;
+
+    padding:
+    11px 16px;
+
+    border-radius:12px;
+
+    background:
+    rgba(6,8,7,.90);
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.4);
+
+    font-size:11px;
+
+    font-weight:700;
+
+    transition:.22s;
+
 }
 
 #message.show{
+
     opacity:1;
+
+    transform:
+    translateX(-50%)
+    translateY(0);
+
 }
 
+/* =====================================================
+   SAVE STATUS
+===================================================== */
+
 #saveStatus{
+
     position:absolute;
+
     left:50%;
-    top:75px;
-    transform:translateX(-50%);
-    z-index:500;
-    font-size:10px;
-    background:rgba(0,0,0,.45);
-    padding:4px 9px;
-    border-radius:20px;
+    top:78px;
+
+    transform:
+    translateX(-50%);
+
+    z-index:450;
+
     opacity:0;
+
+    padding:
+    5px 10px;
+
+    border-radius:20px;
+
+    background:
+    rgba(8,12,9,.78);
+
+    color:#a9deb0;
+
+    font-size:9px;
+
     transition:.25s;
+
 }
 
 #saveStatus.show{
     opacity:1;
 }
 
+/* =====================================================
+   MOBILE
+===================================================== */
+
 @media(max-width:700px){
 
+    #topbar{
+        height:72px;
+    }
+
+    .logo{
+        min-width:108px;
+        font-size:12px;
+    }
+
+    .stat{
+        min-width:78px;
+    }
+
     #missions{
+
+        top:82px;
+
         width:185px;
+
     }
 
     #miniMap{
-        width:95px;
-        height:95px;
+
+        top:82px;
+
+        width:100px;
+        height:100px;
+
     }
 
     #sideMenu{
+
         top:190px;
+
         width:92px;
+
     }
 
     .sideBtn{
-        min-height:43px;
-        font-size:10px;
+
+        min-height:42px;
+
+        font-size:9px;
+
+    }
+
+    #joystickBase{
+
+        width:125px;
+        height:125px;
+
+    }
+
+    #joystickKnob{
+
+        left:32px;
+        top:32px;
+
+        width:57px;
+        height:57px;
+
+    }
+
+    #collect{
+
+        width:100px;
+        height:100px;
+
     }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div id="game">
 
-<div id="world">
+    <div id="world">
 
-<div class="path horizontal"></div>
-<div class="path vertical"></div>
+        <div id="baseArea"></div>
 
-<div id="lockedArea">
-    <div class="lockedBox">
+        <div class="path main-horizontal"></div>
+        <div class="path main-vertical"></div>
 
-        <h2>🔒 Área Bloqueada</h2>
+        <div class="path hut-path"></div>
+        <div class="path lumber-path"></div>
+        <div class="path quarry-path"></div>
 
-        <p>
-            Expanda seu território para liberar novas construções.
-        </p>
+        <div id="lockedArea">
 
-        <strong>
-            💰 R$ 500
-        </strong>
+            <div class="lockedBox">
 
-        <button id="unlockArea">
-            DESBLOQUEAR
+                <div class="lockIcon">
+                    🔒
+                </div>
+
+                <h2>
+                    Nova Região
+                </h2>
+
+                <p>
+                    Expanda sua base e tenha acesso
+                    às construções de produção.
+                </p>
+
+                <br>
+
+                <strong>
+                    💰 R$ 500
+                </strong>
+
+                <button id="unlockArea">
+                    DESBLOQUEAR REGIÃO
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- HUD -->
+
+    <div id="topbar">
+
+        <div class="logo">
+
+            SURVIVAL SOUZA
+
+            <small>
+                SURVIVAL TYCOON
+            </small>
+
+        </div>
+
+        <div class="stat">
+
+            MADEIRA
+
+            <strong>
+                🪵
+                <span id="wood">0</span>
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            PEDRA
+
+            <strong>
+                🪨
+                <span id="stone">0</span>
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            COMIDA
+
+            <strong>
+                🍖
+                <span id="food">3</span>
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            DINHEIRO
+
+            <strong>
+                💰 R$
+                <span id="money">100</span>
+            </strong>
+
+        </div>
+
+        <div id="playerCard">
+
+            <strong>
+                VinyCeo • Nv.
+                <span id="level">1</span>
+            </strong>
+
+            <div class="progressText">
+
+                <span>XP</span>
+
+                <span>
+                    <span id="xp">0</span>/100
+                </span>
+
+            </div>
+
+            <div class="xpbar">
+
+                <div id="xpfill"></div>
+
+            </div>
+
+            <div class="progressText">
+
+                <span>🍖 Fome</span>
+
+                <span id="hungerText">
+                    100%
+                </span>
+
+            </div>
+
+            <div class="hungerbar">
+
+                <div id="hungerfill"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="saveStatus">
+        💾 PROGRESSO SALVO
+    </div>
+
+    <!-- MISSIONS -->
+
+    <div id="missions">
+
+        <h3>
+            🎯 MISSÕES
+        </h3>
+
+        <div class="mission">
+
+            Colete 20 madeiras
+
+            <span id="missionWood">
+                0/20
+            </span>
+
+        </div>
+
+        <div class="mission">
+
+            Barraca Nv.3
+
+            <span id="missionHut">
+                0/3
+            </span>
+
+        </div>
+
+        <div class="mission">
+
+            Liberar região
+
+            <span id="missionArea">
+                0/1
+            </span>
+
+        </div>
+
+        <div class="mission">
+
+            Construir Serraria
+
+            <span id="missionLumber">
+                0/1
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- MINIMAP -->
+
+    <div id="miniMap">
+
+        <div id="miniMapInner">
+
+            <div id="miniPlayer"></div>
+
+        </div>
+
+    </div>
+
+    <!-- MENU -->
+
+    <div id="sideMenu">
+
+        <button
+        class="sideBtn"
+        id="btnBuild">
+            🔨 CONSTRUIR
+        </button>
+
+        <button
+        class="sideBtn upgrade"
+        id="btnUpgrade">
+            ⬆️ MELHORIAS
+        </button>
+
+        <button
+        class="sideBtn"
+        id="btnInventory">
+            🎒 INVENTÁRIO
+        </button>
+
+        <button
+        class="sideBtn"
+        id="btnShop">
+            🛒 LOJA
+        </button>
+
+        <button
+        class="sideBtn"
+        id="btnMissions">
+            📜 MISSÕES
         </button>
 
     </div>
-</div>
 
-</div>
+    <div id="nearInfo"></div>
 
-<div id="topbar">
+    <!-- MOBILE -->
 
-<div class="logo">
-SURVIVAL SOUZA
-</div>
+    <div id="joystickBase">
 
-<div class="stat">
-Madeira
-<strong>🪵 <span id="wood">0</span></strong>
-</div>
+        <div id="joystickKnob"></div>
 
-<div class="stat">
-Pedra
-<strong>🪨 <span id="stone">0</span></strong>
-</div>
+    </div>
 
-<div class="stat">
-Comida
-<strong>🍖 <span id="food">3</span></strong>
-</div>
+    <button id="collect">
 
-<div class="stat">
-Dinheiro
-<strong>💰 R$ <span id="money">100</span></strong>
-</div>
+        <span>✋</span>
 
-<div id="playerCard">
+        COLETAR
 
-<strong>
-VinyCeo • Nv. <span id="level">1</span>
-</strong>
+    </button>
 
-<div class="xpbar">
-<div id="xpfill"></div>
-</div>
+    <div id="message"></div>
 
-<div style="font-size:9px;">
-XP <span id="xp">0</span>/100
-</div>
+    <!-- BUILD PANEL -->
 
-<div style="font-size:9px;margin-top:4px;">
-🍖 Fome
-</div>
+    <div
+    class="panel"
+    id="buildPanel">
 
-<div class="hungerbar">
-<div id="hungerfill"></div>
-</div>
+        <h2>
+            🔨 Construções
+        </h2>
 
-</div>
+        <div class="card">
 
-</div>
+            <strong>
+                🛖 Barraca de Sobrevivência
+            </strong>
 
-<div id="saveStatus">
-💾 Jogo salvo
-</div>
+            Seu primeiro abrigo.
+            Produz dinheiro automaticamente.
 
-<div id="missions">
+            <br>
 
-<h3>🎯 Missões</h3>
+            <span class="price">
+                🪵 10 • 🪨 5
+            </span>
 
-<div class="mission">
-Colete 20 madeiras
-<span id="missionWood">0/20</span>
-</div>
+            <button
+            class="panelBtn"
+            id="buildHut">
+                CONSTRUIR BARRACA
+            </button>
 
-<div class="mission">
-Barraca Nível 3
-<span id="missionHut">0/3</span>
-</div>
+        </div>
 
-<div class="mission">
-Desbloqueie nova área
-<span id="missionArea">0/1</span>
-</div>
+        <div
+        class="card"
+        id="lumberCard">
 
-<div class="mission">
-Construa Serraria
-<span id="missionLumber">0/1</span>
-</div>
+            <strong>
+                🪵 Serraria
+            </strong>
 
-</div>
+            Produz madeira automaticamente.
 
-<div id="miniMap">
-<div id="miniMapInner">
-<div id="miniPlayer"></div>
-</div>
-</div>
+            <br>
 
-<div id="sideMenu">
+            <span class="price">
+                🪵 30 • 🪨 15 • 💰 R$200
+            </span>
 
-<button class="sideBtn" id="btnBuild">
-🔨 Construir
-</button>
+            <button
+            class="panelBtn"
+            id="buildLumber">
+                CONSTRUIR SERRARIA
+            </button>
 
-<button class="sideBtn upgrade" id="btnUpgrade">
-⬆️ Melhorias
-</button>
+        </div>
 
-<button class="sideBtn" id="btnInventory">
-🎒 Inventário
-</button>
+        <div
+        class="card"
+        id="quarryCard">
 
-<button class="sideBtn" id="btnShop">
-🛒 Loja
-</button>
+            <strong>
+                ⛏️ Pedreira
+            </strong>
 
-<button class="sideBtn" id="btnMissions">
-📜 Missões
-</button>
+            Produz pedra automaticamente.
 
-</div>
+            <br>
 
-<div id="nearInfo"></div>
+            <span class="price">
+                🪵 25 • 🪨 30 • 💰 R$300
+            </span>
 
-<div id="joystickBase">
-<div id="joystickKnob"></div>
-</div>
+            <button
+            class="panelBtn"
+            id="buildQuarry">
+                CONSTRUIR PEDREIRA
+            </button>
 
-<button id="collect">
-✋<br>COLETAR
-</button>
+        </div>
 
-<div id="message"></div>
+        <button
+        class="panelBtn dark closePanel">
 
-<!-- BUILD -->
+            FECHAR
 
-<div class="panel" id="buildPanel">
+        </button>
 
-<h2>🔨 Construções</h2>
+    </div>
 
-<div class="card">
+    <!-- UPGRADE PANEL -->
 
-<strong>🛖 Barraca</strong>
+    <div
+    class="panel"
+    id="upgradePanel">
 
-<br>
+        <h2>
+            ⬆️ Melhorias
+        </h2>
 
-🪵 10 Madeira
-<br>
-🪨 5 Pedra
+        <div class="card">
 
-<br><br>
+            <strong>
+                🛖 Barraca
+            </strong>
 
-<button class="panelBtn" id="buildHut">
-CONSTRUIR
-</button>
+            Nível atual:
 
-</div>
+            <b id="hutLevelText">
+                0
+            </b>
 
-<div class="card" id="lumberCard">
+            <br>
 
-<strong>🪵 Serraria</strong>
+            Produção:
 
-Gera madeira automaticamente.
+            <b>
+                R$
+                <span id="hutIncomeText">
+                    0
+                </span>
+                / 5s
+            </b>
 
-<br><br>
+            <button
+            class="panelBtn orange"
+            id="upgradeHut">
 
-🪵 30 Madeira
-<br>
-🪨 15 Pedra
-<br>
-💰 R$ 200
+                MELHORAR BARRACA
 
-<button class="panelBtn" id="buildLumber">
-CONSTRUIR SERRARIA
-</button>
+            </button>
 
-</div>
+        </div>
 
-<div class="card" id="quarryCard">
+        <div class="card">
 
-<strong>⛏️ Pedreira</strong>
+            <strong>
+                🏃 Velocidade
+            </strong>
 
-Gera pedra automaticamente.
+            Nível:
 
-<br><br>
+            <span id="speedLevel">
+                1
+            </span>
 
-🪵 25 Madeira
-<br>
-🪨 30 Pedra
-<br>
-💰 R$ 300
+            <button
+            class="panelBtn"
+            id="upgradeSpeed">
 
-<button class="panelBtn" id="buildQuarry">
-CONSTRUIR PEDREIRA
-</button>
+                MELHORAR
 
-</div>
+            </button>
 
-<button class="panelBtn dark closePanel">
-FECHAR
-</button>
+        </div>
 
-</div>
+        <div class="card">
 
-<!-- UPGRADES -->
+            <strong>
+                🪓 Coleta
+            </strong>
 
-<div class="panel" id="upgradePanel">
+            Nível:
 
-<h2>⬆️ Melhorias</h2>
+            <span id="collectLevel">
+                1
+            </span>
 
-<div class="card">
+            <button
+            class="panelBtn"
+            id="upgradeCollect">
 
-<strong>🛖 Barraca</strong>
+                MELHORAR
 
-Nível:
-<span id="hutLevelText">0</span>
+            </button>
 
-<br>
+        </div>
 
-Renda:
-R$ <span id="hutIncomeText">0</span> / 5s
+        <button
+        class="panelBtn dark closePanel">
 
-<button class="panelBtn orange" id="upgradeHut">
-MELHORAR BARRACA
-</button>
+            FECHAR
 
-</div>
+        </button>
 
-<div class="card">
+    </div>
 
-<strong>🏃 Velocidade</strong>
+    <!-- INVENTORY -->
 
-Nível:
-<span id="speedLevel">1</span>
+    <div
+    class="panel"
+    id="inventoryPanel">
 
-<button class="panelBtn" id="upgradeSpeed">
-Melhorar
-</button>
+        <h2>
+            🎒 Inventário
+        </h2>
 
-</div>
+        <div class="inventory-grid">
 
-<div class="card">
+            <div class="inventory-item">
 
-<strong>🪓 Coleta</strong>
+                <span class="inventoryIcon">
+                    🪵
+                </span>
 
-Nível:
-<span id="collectLevel">1</span>
+                Madeira
 
-<button class="panelBtn" id="upgradeCollect">
-Melhorar
-</button>
+                <strong id="invWood">
+                    0
+                </strong>
 
-</div>
+            </div>
 
-<button class="panelBtn dark closePanel">
-FECHAR
-</button>
+            <div class="inventory-item">
 
-</div>
+                <span class="inventoryIcon">
+                    🪨
+                </span>
 
-<!-- INVENTORY -->
+                Pedra
 
-<div class="panel" id="inventoryPanel">
+                <strong id="invStone">
+                    0
+                </strong>
 
-<h2>🎒 Inventário</h2>
+            </div>
 
-<div class="inventory-grid">
+            <div class="inventory-item">
 
-<div class="inventory-item">
-🪵 Madeira
-<br>
-<strong id="invWood">0</strong>
-</div>
+                <span class="inventoryIcon">
+                    🍖
+                </span>
 
-<div class="inventory-item">
-🪨 Pedra
-<br>
-<strong id="invStone">0</strong>
-</div>
+                Comida
 
-<div class="inventory-item">
-🍖 Comida
-<br>
-<strong id="invFood">3</strong>
-</div>
+                <strong id="invFood">
+                    3
+                </strong>
 
-<div class="inventory-item">
-💰 Dinheiro
-<br>
-<strong>R$ <span id="invMoney">100</span></strong>
-</div>
+            </div>
 
-</div>
+            <div class="inventory-item">
 
-<div class="card" style="margin-top:10px;">
+                <span class="inventoryIcon">
+                    💰
+                </span>
 
-<strong>🍖 Comer</strong>
+                Dinheiro
 
-<button class="panelBtn orange" id="eatFood">
-COMER
-</button>
+                <strong>
+                    R$
+                    <span id="invMoney">
+                        100
+                    </span>
+                </strong>
 
-</div>
+            </div>
 
-<button class="panelBtn dark closePanel">
-FECHAR
-</button>
+        </div>
 
-</div>
+        <div
+        class="card"
+        style="margin-top:12px">
 
-<!-- SHOP -->
+            <strong>
+                🍖 Comer
+            </strong>
 
-<div class="panel" id="shopPanel">
+            Consome 1 comida e recupera sua fome.
 
-<h2>🛒 Loja</h2>
+            <button
+            class="panelBtn orange"
+            id="eatFood">
 
-<div class="card">
+                COMER
 
-🍖 +5 comida
-<br>
-R$30
+            </button>
 
-<button class="panelBtn orange" id="buyFood">
-COMPRAR
-</button>
+        </div>
 
-</div>
+        <button
+        class="panelBtn dark closePanel">
 
-<div class="card">
+            FECHAR
 
-🪵 +10 madeira
-<br>
-R$50
+        </button>
 
-<button class="panelBtn orange" id="buyWood">
-COMPRAR
-</button>
+    </div>
 
-</div>
+    <!-- SHOP -->
 
-<div class="card">
+    <div
+    class="panel"
+    id="shopPanel">
 
-🪨 +10 pedra
-<br>
-R$60
+        <h2>
+            🛒 Loja
+        </h2>
 
-<button class="panelBtn orange" id="buyStone">
-COMPRAR
-</button>
+        <div class="card">
 
-</div>
+            <strong>
+                🍖 Pacote de Comida
+            </strong>
 
-<button class="panelBtn dark closePanel">
-FECHAR
-</button>
+            +5 Comidas
 
-</div>
+            <br>
+
+            <span class="price">
+                💰 R$30
+            </span>
+
+            <button
+            class="panelBtn orange"
+            id="buyFood">
+
+                COMPRAR
+
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <strong>
+                🪵 Pacote de Madeira
+            </strong>
+
+            +10 Madeiras
+
+            <br>
+
+            <span class="price">
+                💰 R$50
+            </span>
+
+            <button
+            class="panelBtn orange"
+            id="buyWood">
+
+                COMPRAR
+
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <strong>
+                🪨 Pacote de Pedra
+            </strong>
+
+            +10 Pedras
+
+            <br>
+
+            <span class="price">
+                💰 R$60
+            </span>
+
+            <button
+            class="panelBtn orange"
+            id="buyStone">
+
+                COMPRAR
+
+            </button>
+
+        </div>
+
+        <button
+        class="panelBtn dark closePanel">
+
+            FECHAR
+
+        </button>
+
+    </div>
 
 </div>
 
 <script>
 
-const world = document.getElementById("world");
-const game = document.getElementById("game");
+/* =====================================================
+   CONFIGURAÇÕES
+===================================================== */
 
 const WORLD_SIZE = 2600;
 
+const SAVE_KEY =
+"survivalSouzaSaveV2";
+
+/*
+POSIÇÕES FIXAS DA BASE
+*/
+
+const BASE_POSITIONS = {
+
+    hut:{
+        x:1340,
+        y:1450
+    },
+
+    lumber:{
+        x:1580,
+        y:1080
+    },
+
+    quarry:{
+        x:880,
+        y:1450
+    }
+
+};
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const game =
+document.getElementById("game");
+
+const world =
+document.getElementById("world");
+
+const messageElement =
+document.getElementById("message");
+
+const nearInfo =
+document.getElementById("nearInfo");
+
+/* =====================================================
+   PLAYER DATA
+===================================================== */
+
 let playerX = 1300;
-let playerY = 1300;
+let playerY = 1200;
 
 let speed = 220;
 
@@ -1099,49 +2822,82 @@ let hunger = 100;
 
 let speedLevel = 1;
 let collectLevel = 1;
+
 let collectAmount = 1;
 
 let hutBuilt = false;
 let hutLevel = 0;
 
-let hutX = null;
-let hutY = null;
-
 let lumberBuilt = false;
-let lumberX = null;
-let lumberY = null;
-
 let quarryBuilt = false;
-let quarryX = null;
-let quarryY = null;
 
 let areaUnlocked = false;
+
+/* =====================================================
+   MOVEMENT
+===================================================== */
 
 let inputX = 0;
 let inputY = 0;
 
-let lastTime = performance.now();
+let lastTime =
+performance.now();
+
+const keys = {};
 
 const resources = [];
 
-const player = document.createElement("div");
+/* =====================================================
+   PLAYER
+===================================================== */
+
+const player =
+document.createElement("div");
 
 player.id = "player";
 
 world.appendChild(player);
 
-const SAVE_KEY = "survivalSouzaSaveV2";
+/* =====================================================
+   MESSAGE
+===================================================== */
 
-/* ======================
-SAVE
-====================== */
+function showMessage(text){
 
-function saveGame(show = false){
+    messageElement.textContent =
+    text;
+
+    messageElement.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        showMessage.timer
+    );
+
+    showMessage.timer =
+    setTimeout(()=>{
+
+        messageElement
+        .classList
+        .remove("show");
+
+    },1400);
+
+}
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+function saveGame(showStatus=false){
 
     const data = {
 
         playerX,
         playerY,
+
+        speed,
 
         wood,
         stone,
@@ -1150,9 +2906,8 @@ function saveGame(show = false){
 
         xp,
         level,
-        hunger,
 
-        speed,
+        hunger,
 
         speedLevel,
         collectLevel,
@@ -1160,45 +2915,60 @@ function saveGame(show = false){
 
         hutBuilt,
         hutLevel,
-        hutX,
-        hutY,
 
         lumberBuilt,
-        lumberX,
-        lumberY,
-
         quarryBuilt,
-        quarryX,
-        quarryY,
 
         areaUnlocked
 
     };
 
     localStorage.setItem(
+
         SAVE_KEY,
+
         JSON.stringify(data)
+
     );
 
-    if(show){
+    if(showStatus){
 
         const status =
-        document.getElementById("saveStatus");
+        document.getElementById(
+            "saveStatus"
+        );
 
-        status.classList.add("show");
+        status.classList.add(
+            "show"
+        );
 
+        clearTimeout(
+            saveGame.timer
+        );
+
+        saveGame.timer =
         setTimeout(()=>{
-            status.classList.remove("show");
-        },900);
+
+            status
+            .classList
+            .remove("show");
+
+        },1000);
 
     }
 
 }
 
+/* =====================================================
+   LOAD
+===================================================== */
+
 function loadGame(){
 
     const save =
-    localStorage.getItem(SAVE_KEY);
+    localStorage.getItem(
+        SAVE_KEY
+    );
 
     if(!save){
         return;
@@ -1209,197 +2979,326 @@ function loadGame(){
         const d =
         JSON.parse(save);
 
-        playerX = d.playerX ?? playerX;
-        playerY = d.playerY ?? playerY;
+        playerX =
+        d.playerX ?? playerX;
 
-        wood = d.wood ?? wood;
-        stone = d.stone ?? stone;
-        food = d.food ?? food;
-        money = d.money ?? money;
+        playerY =
+        d.playerY ?? playerY;
 
-        xp = d.xp ?? xp;
-        level = d.level ?? level;
-        hunger = d.hunger ?? hunger;
+        speed =
+        d.speed ?? speed;
 
-        speed = d.speed ?? speed;
+        wood =
+        d.wood ?? wood;
+
+        stone =
+        d.stone ?? stone;
+
+        food =
+        d.food ?? food;
+
+        money =
+        d.money ?? money;
+
+        xp =
+        d.xp ?? xp;
+
+        level =
+        d.level ?? level;
+
+        hunger =
+        d.hunger ?? hunger;
 
         speedLevel =
-        d.speedLevel ?? speedLevel;
+        d.speedLevel ??
+        speedLevel;
 
         collectLevel =
-        d.collectLevel ?? collectLevel;
+        d.collectLevel ??
+        collectLevel;
 
         collectAmount =
-        d.collectAmount ?? collectAmount;
+        d.collectAmount ??
+        collectAmount;
 
         hutBuilt =
-        d.hutBuilt ?? hutBuilt;
+        d.hutBuilt ??
+        hutBuilt;
 
         hutLevel =
-        d.hutLevel ?? hutLevel;
-
-        hutX =
-        d.hutX ?? hutX;
-
-        hutY =
-        d.hutY ?? hutY;
+        d.hutLevel ??
+        hutLevel;
 
         lumberBuilt =
-        d.lumberBuilt ?? lumberBuilt;
-
-        lumberX =
-        d.lumberX ?? lumberX;
-
-        lumberY =
-        d.lumberY ?? lumberY;
+        d.lumberBuilt ??
+        lumberBuilt;
 
         quarryBuilt =
-        d.quarryBuilt ?? quarryBuilt;
-
-        quarryX =
-        d.quarryX ?? quarryX;
-
-        quarryY =
-        d.quarryY ?? quarryY;
+        d.quarryBuilt ??
+        quarryBuilt;
 
         areaUnlocked =
-        d.areaUnlocked ?? areaUnlocked;
+        d.areaUnlocked ??
+        areaUnlocked;
 
     }
-    catch(e){
+    catch(error){
 
         console.error(
-            "Erro no save",
-            e
+            "Erro ao carregar:",
+            error
         );
 
     }
 
 }
 
-/* ======================
-MESSAGE
-====================== */
-
-function message(text){
-
-    const el =
-    document.getElementById("message");
-
-    el.textContent = text;
-
-    el.classList.add("show");
-
-    clearTimeout(
-        message.timer
-    );
-
-    message.timer =
-    setTimeout(()=>{
-
-        el.classList.remove("show");
-
-    },1300);
-
-}
-
-/* ======================
-HUD
-====================== */
+/* =====================================================
+   HUD
+===================================================== */
 
 function updateHUD(){
 
-    document.getElementById("wood").textContent = wood;
-    document.getElementById("stone").textContent = stone;
-    document.getElementById("food").textContent = food;
-    document.getElementById("money").textContent = money;
+    document
+    .getElementById("wood")
+    .textContent =
+    wood;
 
-    document.getElementById("invWood").textContent = wood;
-    document.getElementById("invStone").textContent = stone;
-    document.getElementById("invFood").textContent = food;
-    document.getElementById("invMoney").textContent = money;
+    document
+    .getElementById("stone")
+    .textContent =
+    stone;
 
-    document.getElementById("xp").textContent = xp;
-    document.getElementById("level").textContent = level;
+    document
+    .getElementById("food")
+    .textContent =
+    food;
 
-    document.getElementById("xpfill").style.width =
+    document
+    .getElementById("money")
+    .textContent =
+    money;
+
+    document
+    .getElementById("invWood")
+    .textContent =
+    wood;
+
+    document
+    .getElementById("invStone")
+    .textContent =
+    stone;
+
+    document
+    .getElementById("invFood")
+    .textContent =
+    food;
+
+    document
+    .getElementById("invMoney")
+    .textContent =
+    money;
+
+    document
+    .getElementById("xp")
+    .textContent =
+    xp;
+
+    document
+    .getElementById("level")
+    .textContent =
+    level;
+
+    document
+    .getElementById("xpfill")
+    .style.width =
     Math.min(xp,100)+"%";
 
-    document.getElementById("hungerfill").style.width =
+    document
+    .getElementById("hungerfill")
+    .style.width =
     hunger+"%";
 
-    document.getElementById("speedLevel").textContent =
+    document
+    .getElementById("hungerText")
+    .textContent =
+    hunger+"%";
+
+    document
+    .getElementById("speedLevel")
+    .textContent =
     speedLevel;
 
-    document.getElementById("collectLevel").textContent =
+    document
+    .getElementById("collectLevel")
+    .textContent =
     collectLevel;
 
-    document.getElementById("hutLevelText").textContent =
+    document
+    .getElementById("hutLevelText")
+    .textContent =
     hutLevel;
 
-    document.getElementById("hutIncomeText").textContent =
+    document
+    .getElementById("hutIncomeText")
+    .textContent =
     getHutIncome();
 
-    document.getElementById("missionWood").textContent =
-    Math.min(wood,20)+"/20";
+    document
+    .getElementById("missionWood")
+    .textContent =
+    Math.min(
+        wood,
+        20
+    )+"/20";
 
-    document.getElementById("missionHut").textContent =
-    Math.min(hutLevel,3)+"/3";
+    document
+    .getElementById("missionHut")
+    .textContent =
+    Math.min(
+        hutLevel,
+        3
+    )+"/3";
 
-    document.getElementById("missionArea").textContent =
-    areaUnlocked ? "1/1" : "0/1";
+    document
+    .getElementById("missionArea")
+    .textContent =
+    areaUnlocked
+    ? "1/1"
+    : "0/1";
 
-    document.getElementById("missionLumber").textContent =
-    lumberBuilt ? "1/1" : "0/1";
+    document
+    .getElementById("missionLumber")
+    .textContent =
+    lumberBuilt
+    ? "1/1"
+    : "0/1";
 
-    document.getElementById("lumberCard").style.opacity =
-    areaUnlocked ? "1" : ".45";
+    document
+    .getElementById("lumberCard")
+    .style.opacity =
+    areaUnlocked
+    ? "1"
+    : ".45";
 
-    document.getElementById("quarryCard").style.opacity =
-    areaUnlocked ? "1" : ".45";
+    document
+    .getElementById("quarryCard")
+    .style.opacity =
+    areaUnlocked
+    ? "1"
+    : ".45";
 
 }
 
-/* ======================
-XP
-====================== */
+/* =====================================================
+   XP
+===================================================== */
 
 function addXP(amount){
 
     xp += amount;
 
-    if(xp >= 100){
+    while(xp >= 100){
 
         xp -= 100;
 
         level++;
 
-        message(
-            "🎉 Nível "+level
+        showMessage(
+            "🎉 Nível "+level+"!"
         );
 
     }
 
 }
 
-/* ======================
-MAP RESOURCES
-====================== */
+/* =====================================================
+   RESERVED AREA
+===================================================== */
+
+function isReservedArea(x,y){
+
+    /*
+    Evita árvores e pedras
+    no centro da base.
+    */
+
+    if(
+        x > 760 &&
+        x < 1810 &&
+        y > 820 &&
+        y < 1750
+    ){
+
+        return true;
+
+    }
+
+    return false;
+
+}
+
+/* =====================================================
+   RANDOM POSITION
+===================================================== */
+
+function randomWorldPosition(){
+
+    let x;
+    let y;
+
+    let attempts = 0;
+
+    do{
+
+        x =
+        120 +
+        Math.random() *
+        2250;
+
+        y =
+        120 +
+        Math.random() *
+        2250;
+
+        attempts++;
+
+    }
+    while(
+        isReservedArea(x,y) &&
+        attempts < 100
+    );
+
+    return {x,y};
+
+}
+
+/* =====================================================
+   TREE
+===================================================== */
 
 function addTree(x,y){
 
     const el =
-    document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
     el.className =
     "tree";
 
     el.innerHTML = `
+
         <div class="tree-shadow"></div>
+
         <div class="tree-trunk"></div>
+
         <div class="tree-layer one"></div>
+
         <div class="tree-layer two"></div>
+
         <div class="tree-layer three"></div>
+
     `;
 
     el.style.left =
@@ -1413,20 +3312,30 @@ function addTree(x,y){
     resources.push({
 
         type:"tree",
+
         x,
         y,
+
         hp:3,
+
         active:true,
+
         el
 
     });
 
 }
 
+/* =====================================================
+   ROCK
+===================================================== */
+
 function addRock(x,y){
 
     const el =
-    document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
     el.className =
     "rock";
@@ -1442,73 +3351,101 @@ function addRock(x,y){
     resources.push({
 
         type:"rock",
+
         x,
         y,
+
         hp:4,
+
         active:true,
+
         el
 
     });
 
 }
 
+/* =====================================================
+   CREATE MAP
+===================================================== */
+
 for(let i=0;i<45;i++){
 
+    const p =
+    randomWorldPosition();
+
     addTree(
-        150+Math.random()*2200,
-        150+Math.random()*2200
+        p.x,
+        p.y
     );
 
 }
 
-for(let i=0;i<22;i++){
+for(let i=0;i<23;i++){
+
+    const p =
+    randomWorldPosition();
 
     addRock(
-        150+Math.random()*2200,
-        150+Math.random()*2200
+        p.x,
+        p.y
     );
 
 }
 
-for(let i=0;i<60;i++){
+for(let i=0;i<80;i++){
 
-    const g =
-    document.createElement("div");
+    const p =
+    randomWorldPosition();
 
-    g.className =
+    const grass =
+    document.createElement(
+        "div"
+    );
+
+    grass.className =
     "grass";
 
-    g.style.left =
-    (100+Math.random()*2300)+"px";
+    grass.style.left =
+    p.x+"px";
 
-    g.style.top =
-    (100+Math.random()*2300)+"px";
+    grass.style.top =
+    p.y+"px";
 
-    world.appendChild(g);
+    world.appendChild(
+        grass
+    );
 
 }
 
-for(let i=0;i<35;i++){
+for(let i=0;i<32;i++){
 
-    const b =
-    document.createElement("div");
+    const p =
+    randomWorldPosition();
 
-    b.className =
+    const bush =
+    document.createElement(
+        "div"
+    );
+
+    bush.className =
     "bush";
 
-    b.style.left =
-    (100+Math.random()*2300)+"px";
+    bush.style.left =
+    p.x+"px";
 
-    b.style.top =
-    (100+Math.random()*2300)+"px";
+    bush.style.top =
+    p.y+"px";
 
-    world.appendChild(b);
+    world.appendChild(
+        bush
+    );
 
 }
 
-/* ======================
-BUILDING VISUALS
-====================== */
+/* =====================================================
+   CABANA VISUAL
+===================================================== */
 
 function createHut(){
 
@@ -1516,12 +3453,18 @@ function createHut(){
         return;
     }
 
-    if(document.getElementById("hutBuilding")){
+    if(
+        document.getElementById(
+            "hutBuilding"
+        )
+    ){
         return;
     }
 
     const hut =
-    document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
     hut.id =
     "hutBuilding";
@@ -1531,6 +3474,12 @@ function createHut(){
 
     hut.innerHTML = `
 
+        <div class="chimney"></div>
+
+        <div class="smoke">
+            ☁️
+        </div>
+
         <div class="hut-roof"></div>
 
         <div class="hut-door"></div>
@@ -1538,21 +3487,40 @@ function createHut(){
         <div class="hut-window"></div>
 
         <div class="hut-level">
-            🛖 Barraca • Nv.
-            <span id="hutWorldLevel">${hutLevel}</span>
+
+            🛖 CABANA •
+
+            Nv.
+
+            <span id="hutWorldLevel">
+                ${hutLevel}
+            </span>
+
         </div>
 
     `;
 
+    /*
+    POSIÇÃO FIXA
+    */
+
     hut.style.left =
-    hutX+"px";
+    BASE_POSITIONS.hut.x+
+    "px";
 
     hut.style.top =
-    hutY+"px";
+    BASE_POSITIONS.hut.y+
+    "px";
 
-    world.appendChild(hut);
+    world.appendChild(
+        hut
+    );
 
 }
+
+/* =====================================================
+   UPDATE CABANA
+===================================================== */
 
 function updateHutVisual(){
 
@@ -1570,18 +3538,28 @@ function updateHutVisual(){
 
 }
 
+/* =====================================================
+   SERRARIA VISUAL
+===================================================== */
+
 function createLumber(){
 
     if(!lumberBuilt){
         return;
     }
 
-    if(document.getElementById("lumberBuilding")){
+    if(
+        document.getElementById(
+            "lumberBuilding"
+        )
+    ){
         return;
     }
 
     const el =
-    document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
     el.id =
     "lumberBuilding";
@@ -1590,20 +3568,30 @@ function createLumber(){
     "lumberMill";
 
     el.innerHTML = `
+
         <div class="building-label">
-            🪵 Serraria
+
+            🪵 SERRARIA
+
         </div>
+
     `;
 
     el.style.left =
-    lumberX+"px";
+    BASE_POSITIONS.lumber.x+
+    "px";
 
     el.style.top =
-    lumberY+"px";
+    BASE_POSITIONS.lumber.y+
+    "px";
 
     world.appendChild(el);
 
 }
+
+/* =====================================================
+   QUARRY VISUAL
+===================================================== */
 
 function createQuarry(){
 
@@ -1611,12 +3599,18 @@ function createQuarry(){
         return;
     }
 
-    if(document.getElementById("quarryBuilding")){
+    if(
+        document.getElementById(
+            "quarryBuilding"
+        )
+    ){
         return;
     }
 
     const el =
-    document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
     el.id =
     "quarryBuilding";
@@ -1625,123 +3619,229 @@ function createQuarry(){
     "quarry";
 
     el.innerHTML = `
+
         <div class="building-label">
-            ⛏️ Pedreira
+
+            ⛏️ PEDREIRA
+
         </div>
+
     `;
 
     el.style.left =
-    quarryX+"px";
+    BASE_POSITIONS.quarry.x+
+    "px";
 
     el.style.top =
-    quarryY+"px";
+    BASE_POSITIONS.quarry.y+
+    "px";
 
     world.appendChild(el);
 
 }
 
-/* ======================
-NEAREST RESOURCE
-====================== */
+/* =====================================================
+   DISTANCE
+===================================================== */
+
+function distance(
+ax,
+ay,
+bx,
+by
+){
+
+    return Math.hypot(
+
+        ax-bx,
+
+        ay-by
+
+    );
+
+}
+
+/* =====================================================
+   NEAREST RESOURCE
+===================================================== */
 
 function nearestResource(){
 
     let nearest = null;
-    let distance = Infinity;
 
-    resources.forEach(r=>{
+    let nearestDistance =
+    Infinity;
 
-        if(!r.active){
+    resources.forEach(
+    resource=>{
+
+        if(!resource.active){
             return;
         }
 
         const d =
-        Math.hypot(
-            playerX-r.x,
-            playerY-r.y
+        distance(
+
+            playerX,
+            playerY,
+
+            resource.x,
+            resource.y
+
         );
 
-        if(d < distance){
+        if(
+            d <
+            nearestDistance
+        ){
 
-            distance = d;
-            nearest = r;
+            nearestDistance =
+            d;
+
+            nearest =
+            resource;
 
         }
 
     });
 
-    if(distance <= 110){
+    if(
+        nearestDistance <=
+        115
+    ){
+
         return nearest;
+
     }
 
     return null;
 
 }
 
-let previousNear = null;
+let previousNear =
+null;
 
-function nearUpdate(){
+/* =====================================================
+   RESOURCE INDICATOR
+===================================================== */
 
-    const r =
+function updateNearResource(){
+
+    const resource =
     nearestResource();
 
     if(
         previousNear &&
-        previousNear !== r
+        previousNear !==
+        resource
     ){
 
-        previousNear.el
+        previousNear
+        .el
         .classList
         .remove("near");
 
     }
 
-    if(!r){
+    if(!resource){
 
-        document.getElementById(
-            "nearInfo"
-        ).style.display =
+        nearInfo.style.display =
         "none";
 
-        previousNear = null;
+        previousNear =
+        null;
 
         return;
 
     }
 
-    previousNear = r;
+    resource
+    .el
+    .classList
+    .add("near");
 
-    r.el.classList.add("near");
+    previousNear =
+    resource;
 
-    const info =
-    document.getElementById(
-        "nearInfo"
-    );
-
-    info.style.display =
+    nearInfo.style.display =
     "block";
 
-    info.textContent =
-    r.type === "tree"
-    ? "🌲 Árvore • COLETAR"
-    : "🪨 Pedra • COLETAR";
+    if(
+        resource.type ===
+        "tree"
+    ){
+
+        nearInfo.textContent =
+        "🌲 ÁRVORE • COLETAR";
+
+    }
+    else{
+
+        nearInfo.textContent =
+        "🪨 PEDRA • COLETAR";
+
+    }
 
 }
 
-/* ======================
-COLLECT
-====================== */
+/* =====================================================
+   RESPAWN
+===================================================== */
 
-document.getElementById(
-    "collect"
-).onclick = ()=>{
+function respawnResource(
+resource
+){
 
-    const r =
+    setTimeout(()=>{
+
+        resource.hp =
+        resource.type ===
+        "tree"
+        ? 3
+        : 4;
+
+        resource.active =
+        true;
+
+        resource.el.style.display =
+        "block";
+
+        resource.el.style.opacity =
+        "0";
+
+        resource.el.style.transform =
+        "scale(.4)";
+
+        setTimeout(()=>{
+
+            resource.el.style.opacity =
+            "1";
+
+            resource.el.style.transform =
+            "scale(1)";
+
+        },30);
+
+    },12000);
+
+}
+
+/* =====================================================
+   COLLECT
+===================================================== */
+
+document
+.getElementById("collect")
+.addEventListener(
+"click",
+()=>{
+
+    const resource =
     nearestResource();
 
-    if(!r){
+    if(!resource){
 
-        message(
+        showMessage(
             "Chegue perto de um recurso."
         );
 
@@ -1749,19 +3849,22 @@ document.getElementById(
 
     }
 
-    r.hp--;
+    resource.hp--;
 
-    if(r.type === "tree"){
+    if(
+        resource.type ===
+        "tree"
+    ){
 
         wood +=
         collectAmount;
 
         addXP(3);
 
-        message(
+        showMessage(
             "+"+
             collectAmount+
-            " madeira"
+            " Madeira"
         );
 
     }
@@ -1772,86 +3875,97 @@ document.getElementById(
 
         addXP(4);
 
-        message(
+        showMessage(
             "+"+
             collectAmount+
-            " pedra"
+            " Pedra"
         );
 
     }
 
-    if(r.hp <= 0){
+    if(
+        resource.hp <= 0
+    ){
 
-        r.active = false;
+        resource.active =
+        false;
 
-        r.el.style.display =
-        "none";
+        resource.el.style.opacity =
+        "0";
+
+        resource.el.style.transform =
+        "scale(.4)";
 
         setTimeout(()=>{
 
-            r.hp =
-            r.type === "tree"
-            ? 3
-            : 4;
+            resource.el.style.display =
+            "none";
 
-            r.active =
-            true;
+        },200);
 
-            r.el.style.display =
-            "block";
-
-        },12000);
+        respawnResource(
+            resource
+        );
 
     }
 
     updateHUD();
+
     saveGame();
 
-};
+});
 
-/* ======================
-PANELS
-====================== */
+/* =====================================================
+   PANELS
+===================================================== */
 
 function openPanel(id){
 
-    document.querySelectorAll(
+    document
+    .querySelectorAll(
         ".panel"
-    ).forEach(p=>
-        p.classList.remove("show")
-    );
+    )
+    .forEach(
+    panel=>{
+
+        panel.classList.remove(
+            "show"
+        );
+
+    });
 
     document
     .getElementById(id)
-    .classList
-    .add("show");
+    .classList.add(
+        "show"
+    );
 
 }
 
-document.getElementById(
-    "btnBuild"
-).onclick =
+document
+.getElementById("btnBuild")
+.onclick =
 ()=>openPanel(
     "buildPanel"
 );
 
-document.getElementById(
-    "btnUpgrade"
-).onclick =
+document
+.getElementById("btnUpgrade")
+.onclick =
 ()=>openPanel(
     "upgradePanel"
 );
 
-document.getElementById(
-    "btnInventory"
-).onclick =
+document
+.getElementById("btnInventory")
+.onclick =
 ()=>openPanel(
     "inventoryPanel"
 );
 
-document.getElementById(
-    "btnShop"
-).onclick =
+document
+.getElementById("btnShop")
+.onclick =
 ()=>openPanel(
     "shopPanel"
 );
@@ -1860,73 +3974,91 @@ document
 .querySelectorAll(
     ".closePanel"
 )
-.forEach(btn=>{
+.forEach(
+button=>{
 
-    btn.onclick = ()=>{
+    button.onclick =
+    ()=>{
 
-        document.querySelectorAll(
+        document
+        .querySelectorAll(
             ".panel"
-        ).forEach(p=>
-            p.classList.remove("show")
-        );
+        )
+        .forEach(
+        panel=>{
+
+            panel.classList.remove(
+                "show"
+            );
+
+        });
 
     };
 
 });
 
-document.getElementById(
-    "btnMissions"
-).onclick = ()=>{
+/* =====================================================
+   MISSIONS
+===================================================== */
 
-    const el =
+document
+.getElementById(
+    "btnMissions"
+)
+.onclick =
+()=>{
+
+    const missions =
     document.getElementById(
         "missions"
     );
 
-    el.style.display =
-    el.style.display === "none"
+    missions.style.display =
+    missions.style.display ===
+    "none"
     ? "block"
     : "none";
 
 };
 
-/* ======================
-AREA
-====================== */
+/* =====================================================
+   AREA
+===================================================== */
 
 function updateArea(){
 
-    const el =
+    const locked =
     document.getElementById(
         "lockedArea"
     );
 
-    if(areaUnlocked){
-
-        el.style.display =
-        "none";
-
-    }
-    else{
-
-        el.style.display =
-        "flex";
-
-    }
+    locked.style.display =
+    areaUnlocked
+    ? "none"
+    : "flex";
 
 }
 
-document.getElementById(
+/* =====================================================
+   UNLOCK AREA
+===================================================== */
+
+document
+.getElementById(
     "unlockArea"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     if(areaUnlocked){
+
         return;
+
     }
 
     if(money < 500){
 
-        message(
+        showMessage(
             "Você precisa de R$500."
         );
 
@@ -1936,33 +4068,38 @@ document.getElementById(
 
     money -= 500;
 
-    areaUnlocked = true;
+    areaUnlocked =
+    true;
 
     addXP(30);
 
     updateArea();
+
     updateHUD();
 
     saveGame(true);
 
-    message(
-        "🗺️ Nova área desbloqueada!"
+    showMessage(
+        "🗺️ Nova região desbloqueada!"
     );
 
 };
 
-/* ======================
-HUT
-====================== */
+/* =====================================================
+   BUILD CABANA
+===================================================== */
 
-document.getElementById(
+document
+.getElementById(
     "buildHut"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     if(hutBuilt){
 
-        message(
-            "Sua barraca já foi construída."
+        showMessage(
+            "Sua cabana já foi construída."
         );
 
         return;
@@ -1974,7 +4111,7 @@ document.getElementById(
         stone < 5
     ){
 
-        message(
+        showMessage(
             "Precisa de 10 madeira e 5 pedra."
         );
 
@@ -1983,29 +4120,37 @@ document.getElementById(
     }
 
     wood -= 10;
+
     stone -= 5;
 
-    hutBuilt = true;
-    hutLevel = 1;
+    hutBuilt =
+    true;
 
-    hutX =
-    playerX + 150;
+    hutLevel =
+    1;
 
-    hutY =
-    playerY - 50;
+    /*
+    ELA NÃO DEPENDE MAIS
+    DA POSIÇÃO DO PLAYER.
+    */
 
     createHut();
 
     addXP(20);
 
     updateHUD();
+
     saveGame(true);
 
-    message(
-        "🛖 Barraca construída!"
+    showMessage(
+        "🛖 Cabana construída!"
     );
 
 };
+
+/* =====================================================
+   HUT INCOME
+===================================================== */
 
 function getHutIncome(){
 
@@ -2025,14 +4170,21 @@ function getHutIncome(){
 
 }
 
-document.getElementById(
+/* =====================================================
+   UPGRADE HUT
+===================================================== */
+
+document
+.getElementById(
     "upgradeHut"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     if(!hutBuilt){
 
-        message(
-            "Construa sua barraca primeiro."
+        showMessage(
+            "Construa sua cabana primeiro."
         );
 
         return;
@@ -2041,8 +4193,8 @@ document.getElementById(
 
     if(hutLevel >= 3){
 
-        message(
-            "Barraca no nível máximo."
+        showMessage(
+            "Cabana no nível máximo."
         );
 
         return;
@@ -2057,7 +4209,7 @@ document.getElementById(
             money < 100
         ){
 
-            message(
+            showMessage(
                 "Nv.2: 15 madeira, 10 pedra e R$100."
             );
 
@@ -2066,15 +4218,16 @@ document.getElementById(
         }
 
         wood -= 15;
+
         stone -= 10;
+
         money -= 100;
 
-        hutLevel = 2;
+        hutLevel =
+        2;
 
     }
-    else if(
-        hutLevel === 2
-    ){
+    else{
 
         if(
             wood < 30 ||
@@ -2082,7 +4235,7 @@ document.getElementById(
             money < 300
         ){
 
-            message(
+            showMessage(
                 "Nv.3: 30 madeira, 20 pedra e R$300."
             );
 
@@ -2091,10 +4244,13 @@ document.getElementById(
         }
 
         wood -= 30;
+
         stone -= 20;
+
         money -= 300;
 
-        hutLevel = 3;
+        hutLevel =
+        3;
 
     }
 
@@ -2103,26 +4259,30 @@ document.getElementById(
     addXP(25);
 
     updateHUD();
+
     saveGame(true);
 
-    message(
-        "⬆️ Barraca melhorada!"
+    showMessage(
+        "⬆️ Cabana melhorada!"
     );
 
 };
 
-/* ======================
-SERRARIA
-====================== */
+/* =====================================================
+   BUILD SERRARIA
+===================================================== */
 
-document.getElementById(
+document
+.getElementById(
     "buildLumber"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     if(!areaUnlocked){
 
-        message(
-            "Desbloqueie a nova área primeiro."
+        showMessage(
+            "Desbloqueie a nova região."
         );
 
         return;
@@ -2131,8 +4291,8 @@ document.getElementById(
 
     if(lumberBuilt){
 
-        message(
-            "Você já tem uma serraria."
+        showMessage(
+            "Você já possui uma serraria."
         );
 
         return;
@@ -2145,8 +4305,8 @@ document.getElementById(
         money < 200
     ){
 
-        message(
-            "Precisa 30 madeira, 15 pedra e R$200."
+        showMessage(
+            "Precisa de 30 madeira, 15 pedra e R$200."
         );
 
         return;
@@ -2154,39 +4314,43 @@ document.getElementById(
     }
 
     wood -= 30;
+
     stone -= 15;
+
     money -= 200;
 
-    lumberBuilt = true;
-
-    lumberX = 1900;
-    lumberY = 520;
+    lumberBuilt =
+    true;
 
     createLumber();
 
     addXP(30);
 
     updateHUD();
+
     saveGame(true);
 
-    message(
+    showMessage(
         "🪵 Serraria construída!"
     );
 
 };
 
-/* ======================
-PEDREIRA
-====================== */
+/* =====================================================
+   BUILD QUARRY
+===================================================== */
 
-document.getElementById(
+document
+.getElementById(
     "buildQuarry"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     if(!areaUnlocked){
 
-        message(
-            "Desbloqueie a nova área primeiro."
+        showMessage(
+            "Desbloqueie a nova região."
         );
 
         return;
@@ -2195,8 +4359,8 @@ document.getElementById(
 
     if(quarryBuilt){
 
-        message(
-            "Você já tem uma pedreira."
+        showMessage(
+            "Você já possui uma pedreira."
         );
 
         return;
@@ -2209,8 +4373,8 @@ document.getElementById(
         money < 300
     ){
 
-        message(
-            "Precisa 25 madeira, 30 pedra e R$300."
+        showMessage(
+            "Precisa de 25 madeira, 30 pedra e R$300."
         );
 
         return;
@@ -2218,41 +4382,46 @@ document.getElementById(
     }
 
     wood -= 25;
+
     stone -= 30;
+
     money -= 300;
 
-    quarryBuilt = true;
-
-    quarryX = 2100;
-    quarryY = 760;
+    quarryBuilt =
+    true;
 
     createQuarry();
 
     addXP(35);
 
     updateHUD();
+
     saveGame(true);
 
-    message(
+    showMessage(
         "⛏️ Pedreira construída!"
     );
 
 };
 
-/* ======================
-UPGRADES
-====================== */
+/* =====================================================
+   SPEED UPGRADE
+===================================================== */
 
-document.getElementById(
+document
+.getElementById(
     "upgradeSpeed"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     const price =
-    speedLevel * 100;
+    speedLevel *
+    100;
 
     if(money < price){
 
-        message(
+        showMessage(
             "Dinheiro insuficiente."
         );
 
@@ -2267,20 +4436,33 @@ document.getElementById(
     speed += 30;
 
     updateHUD();
+
     saveGame(true);
+
+    showMessage(
+        "🏃 Velocidade melhorada!"
+    );
 
 };
 
-document.getElementById(
+/* =====================================================
+   COLLECT UPGRADE
+===================================================== */
+
+document
+.getElementById(
     "upgradeCollect"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     const price =
-    collectLevel * 150;
+    collectLevel *
+    150;
 
     if(money < price){
 
-        message(
+        showMessage(
             "Dinheiro insuficiente."
         );
 
@@ -2295,21 +4477,29 @@ document.getElementById(
     collectAmount++;
 
     updateHUD();
+
     saveGame(true);
+
+    showMessage(
+        "🪓 Coleta melhorada!"
+    );
 
 };
 
-/* ======================
-SHOP
-====================== */
+/* =====================================================
+   SHOP
+===================================================== */
 
-document.getElementById(
+document
+.getElementById(
     "buyFood"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     if(money < 30){
 
-        message(
+        showMessage(
             "Dinheiro insuficiente."
         );
 
@@ -2318,20 +4508,29 @@ document.getElementById(
     }
 
     money -= 30;
+
     food += 5;
 
     updateHUD();
+
     saveGame();
+
+    showMessage(
+        "+5 Comidas"
+    );
 
 };
 
-document.getElementById(
+document
+.getElementById(
     "buyWood"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     if(money < 50){
 
-        message(
+        showMessage(
             "Dinheiro insuficiente."
         );
 
@@ -2340,20 +4539,29 @@ document.getElementById(
     }
 
     money -= 50;
+
     wood += 10;
 
     updateHUD();
+
     saveGame();
+
+    showMessage(
+        "+10 Madeiras"
+    );
 
 };
 
-document.getElementById(
+document
+.getElementById(
     "buyStone"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     if(money < 60){
 
-        message(
+        showMessage(
             "Dinheiro insuficiente."
         );
 
@@ -2362,24 +4570,33 @@ document.getElementById(
     }
 
     money -= 60;
+
     stone += 10;
 
     updateHUD();
+
     saveGame();
+
+    showMessage(
+        "+10 Pedras"
+    );
 
 };
 
-/* ======================
-FOOD
-====================== */
+/* =====================================================
+   FOOD
+===================================================== */
 
-document.getElementById(
+document
+.getElementById(
     "eatFood"
-).onclick = ()=>{
+)
+.onclick =
+()=>{
 
     if(food <= 0){
 
-        message(
+        showMessage(
             "Você não tem comida."
         );
 
@@ -2389,7 +4606,7 @@ document.getElementById(
 
     if(hunger >= 95){
 
-        message(
+        showMessage(
             "Você não está com fome."
         );
 
@@ -2402,69 +4619,108 @@ document.getElementById(
     hunger += 35;
 
     if(hunger > 100){
-        hunger = 100;
+
+        hunger =
+        100;
+
     }
 
     updateHUD();
+
     saveGame();
+
+    showMessage(
+        "🍖 Você comeu."
+    );
 
 };
 
-/* ======================
-AUTOMATIC PRODUCTION
-====================== */
+/* =====================================================
+   AUTOMATIC MONEY
+===================================================== */
 
 setInterval(()=>{
 
-    if(hutBuilt){
-
-        money +=
-        getHutIncome();
-
+    if(!hutBuilt){
+        return;
     }
 
+    money +=
+    getHutIncome();
+
     updateHUD();
+
     saveGame();
 
 },5000);
 
+/* =====================================================
+   SERRARIA PRODUCTION
+===================================================== */
+
 setInterval(()=>{
 
-    if(lumberBuilt){
-
-        wood++;
-
-        updateHUD();
-        saveGame();
-
+    if(!lumberBuilt){
+        return;
     }
+
+    wood++;
+
+    updateHUD();
+
+    saveGame();
 
 },8000);
 
+/* =====================================================
+   QUARRY PRODUCTION
+===================================================== */
+
 setInterval(()=>{
 
-    if(quarryBuilt){
-
-        stone++;
-
-        updateHUD();
-        saveGame();
-
+    if(!quarryBuilt){
+        return;
     }
 
+    stone++;
+
+    updateHUD();
+
+    saveGame();
+
 },10000);
+
+/* =====================================================
+   HUNGER
+===================================================== */
 
 setInterval(()=>{
 
     hunger -= 2;
 
     if(hunger < 0){
+
         hunger = 0;
+
+    }
+
+    if(hunger <= 20){
+
+        showMessage(
+            "⚠️ Você está com fome!"
+        );
+
     }
 
     updateHUD();
 
+    saveGame();
+
 },10000);
+
+/* =====================================================
+   AUTO SAVE
+===================================================== */
 
 setInterval(()=>{
 
@@ -2472,35 +4728,35 @@ setInterval(()=>{
 
 },5000);
 
-/* ======================
-KEYBOARD
-====================== */
-
-const keys = {};
+/* =====================================================
+   KEYBOARD
+===================================================== */
 
 window.addEventListener(
 "keydown",
-e=>{
+event=>{
 
     keys[
-        e.key.toLowerCase()
-    ] = true;
+        event.key.toLowerCase()
+    ] =
+    true;
 
 });
 
 window.addEventListener(
 "keyup",
-e=>{
+event=>{
 
     keys[
-        e.key.toLowerCase()
-    ] = false;
+        event.key.toLowerCase()
+    ] =
+    false;
 
 });
 
-/* ======================
-JOYSTICK
-====================== */
+/* =====================================================
+   JOYSTICK
+===================================================== */
 
 const joystickBase =
 document.getElementById(
@@ -2512,46 +4768,66 @@ document.getElementById(
     "joystickKnob"
 );
 
-let joystickActive = false;
-let joystickPointer = null;
+let joystickActive =
+false;
 
-function moveJoystick(x,y){
+let joystickPointer =
+null;
+
+function moveJoystick(
+clientX,
+clientY
+){
 
     const rect =
     joystickBase
     .getBoundingClientRect();
 
-    const cx =
+    const centerX =
     rect.left +
     rect.width/2;
 
-    const cy =
+    const centerY =
     rect.top +
     rect.height/2;
 
     let dx =
-    x-cx;
+    clientX -
+    centerX;
 
     let dy =
-    y-cy;
+    clientY -
+    centerY;
 
     const max =
     42;
 
-    const d =
-    Math.hypot(dx,dy);
+    const distance =
+    Math.hypot(
+        dx,
+        dy
+    );
 
-    if(d > max){
+    if(
+        distance >
+        max
+    ){
 
         dx =
-        dx/d*max;
+        dx /
+        distance *
+        max;
 
         dy =
-        dy/d*max;
+        dy /
+        distance *
+        max;
 
     }
 
-    joystickKnob.style.transform =
+    joystickKnob
+    .style
+    .transform =
     `translate(${dx}px,${dy}px)`;
 
     inputX =
@@ -2562,124 +4838,153 @@ function moveJoystick(x,y){
 
 }
 
-joystickBase.onpointerdown =
-e=>{
+joystickBase
+.onpointerdown =
+event=>{
 
-    joystickActive = true;
+    joystickActive =
+    true;
 
     joystickPointer =
-    e.pointerId;
+    event.pointerId;
 
     joystickBase
     .setPointerCapture(
-        e.pointerId
+        event.pointerId
     );
 
     moveJoystick(
-        e.clientX,
-        e.clientY
+        event.clientX,
+        event.clientY
     );
 
 };
 
-joystickBase.onpointermove =
-e=>{
+joystickBase
+.onpointermove =
+event=>{
 
-    if(!joystickActive){
+    if(
+        !joystickActive
+    ){
         return;
     }
 
     if(
-        e.pointerId !==
+        event.pointerId !==
         joystickPointer
     ){
         return;
     }
 
     moveJoystick(
-        e.clientX,
-        e.clientY
+        event.clientX,
+        event.clientY
     );
 
 };
 
 function stopJoystick(){
 
-    joystickActive = false;
+    joystickActive =
+    false;
 
-    inputX = 0;
-    inputY = 0;
+    joystickPointer =
+    null;
 
-    joystickKnob.style.transform =
-    "translate(0,0)";
+    inputX =
+    0;
+
+    inputY =
+    0;
+
+    joystickKnob
+    .style
+    .transform =
+    "translate(0px,0px)";
 
 }
 
-joystickBase.onpointerup =
+joystickBase
+.onpointerup =
 stopJoystick;
 
-joystickBase.onpointercancel =
+joystickBase
+.onpointercancel =
 stopJoystick;
 
-/* ======================
-CAMERA
-====================== */
+/* =====================================================
+   CAMERA
+===================================================== */
 
-function camera(){
+function updateCamera(){
 
-    let x =
+    let camX =
     game.clientWidth/2 -
     playerX -
-    23;
+    24;
 
-    let y =
+    let camY =
     game.clientHeight/2 -
     playerY -
-    23;
+    27;
 
-    x =
+    camX =
     Math.min(
+
         0,
+
         Math.max(
+
             game.clientWidth -
             WORLD_SIZE,
-            x
+
+            camX
+
         )
+
     );
 
-    y =
+    camY =
     Math.min(
+
         0,
+
         Math.max(
+
             game.clientHeight -
             WORLD_SIZE,
-            y
+
+            camY
+
         )
+
     );
 
     world.style.transform =
-    `translate(${x}px,${y}px)`;
+    `translate(${camX}px,${camY}px)`;
 
 }
 
-/* ======================
-MINIMAP
-====================== */
+/* =====================================================
+   MINI MAP
+===================================================== */
 
-function minimap(){
+function updateMiniMap(){
 
+    const marker =
     document.getElementById(
         "miniPlayer"
-    ).style.left =
+    );
+
+    marker.style.left =
     (
         playerX /
         WORLD_SIZE *
         100
     )+"%";
 
-    document.getElementById(
-        "miniPlayer"
-    ).style.top =
+    marker.style.top =
     (
         playerY /
         WORLD_SIZE *
@@ -2688,16 +4993,23 @@ function minimap(){
 
 }
 
-/* ======================
-GAME LOOP
-====================== */
+/* =====================================================
+   GAME LOOP
+===================================================== */
 
-function loop(time){
+function gameLoop(time){
 
     const delta =
     Math.min(
-        (time-lastTime)/1000,
+
+        (
+            time -
+            lastTime
+        ) /
+        1000,
+
         .05
+
     );
 
     lastTime =
@@ -2712,43 +5024,60 @@ function loop(time){
             keys["w"] ||
             keys["arrowup"]
         ){
+
             y--;
+
         }
 
         if(
             keys["s"] ||
             keys["arrowdown"]
         ){
+
             y++;
+
         }
 
         if(
             keys["a"] ||
             keys["arrowleft"]
         ){
+
             x--;
+
         }
 
         if(
             keys["d"] ||
             keys["arrowright"]
         ){
+
             x++;
+
         }
 
         if(x || y){
 
             const len =
-            Math.hypot(x,y);
+            Math.hypot(
+                x,
+                y
+            );
 
-            inputX = x/len;
-            inputY = y/len;
+            inputX =
+            x/len;
+
+            inputY =
+            y/len;
 
         }
         else{
 
-            inputX = 0;
-            inputY = 0;
+            inputX =
+            0;
+
+            inputY =
+            0;
 
         }
 
@@ -2766,20 +5095,32 @@ function loop(time){
 
     playerX =
     Math.max(
+
         0,
+
         Math.min(
-            WORLD_SIZE-46,
+
+            WORLD_SIZE-48,
+
             playerX
+
         )
+
     );
 
     playerY =
     Math.max(
+
         0,
+
         Math.min(
-            WORLD_SIZE-46,
+
+            WORLD_SIZE-55,
+
             playerY
+
         )
+
     );
 
     player.style.left =
@@ -2788,25 +5129,37 @@ function loop(time){
     player.style.top =
     playerY+"px";
 
-    camera();
-    minimap();
-    nearUpdate();
+    updateCamera();
 
-    requestAnimationFrame(loop);
+    updateMiniMap();
+
+    updateNearResource();
+
+    requestAnimationFrame(
+        gameLoop
+    );
 
 }
 
-/* ======================
-START
-====================== */
+/* =====================================================
+   START
+===================================================== */
 
 loadGame();
 
-updateArea();
+/*
+Mesmo quem tinha uma barraca salva
+na posição antiga terá ela colocada
+na posição fixa nova.
+*/
 
 createHut();
+
 createLumber();
+
 createQuarry();
+
+updateArea();
 
 updateHUD();
 
@@ -2816,7 +5169,9 @@ playerX+"px";
 player.style.top =
 playerY+"px";
 
-requestAnimationFrame(loop);
+requestAnimationFrame(
+    gameLoop
+);
 
 window.addEventListener(
 "beforeunload",
