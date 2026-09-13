@@ -19,8 +19,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
     width:100%;
     height:100%;
     overflow:hidden;
@@ -44,8 +43,8 @@ button{
 
 #world{
     position:absolute;
-    width:2400px;
-    height:2400px;
+    width:2600px;
+    height:2600px;
     left:0;
     top:0;
     background:
@@ -71,17 +70,70 @@ button{
 }
 
 .path.horizontal{
-    width:900px;
+    width:1100px;
     height:90px;
     left:760px;
-    top:1150px;
+    top:1250px;
 }
 
 .path.vertical{
     width:90px;
-    height:900px;
-    left:1150px;
+    height:1100px;
+    left:1250px;
     top:760px;
+}
+
+#lockedArea{
+    position:absolute;
+    left:1750px;
+    top:350px;
+    width:600px;
+    height:700px;
+    border:5px dashed rgba(255,188,72,.9);
+    background:
+    repeating-linear-gradient(
+        45deg,
+        rgba(38,45,39,.88) 0px,
+        rgba(38,45,39,.88) 20px,
+        rgba(47,54,47,.9) 20px,
+        rgba(47,54,47,.9) 40px
+    );
+    z-index:18;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border-radius:20px;
+    box-shadow:0 20px 35px rgba(0,0,0,.3);
+}
+
+.lockedBox{
+    background:rgba(12,15,12,.92);
+    padding:24px;
+    border-radius:16px;
+    border:1px solid #5d664f;
+    width:260px;
+}
+
+.lockedBox h2{
+    color:#ffb53f;
+    margin-bottom:10px;
+}
+
+.lockedBox p{
+    font-size:13px;
+    line-height:1.5;
+}
+
+.lockedBox button{
+    width:100%;
+    margin-top:14px;
+    min-height:45px;
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-weight:bold;
+    background:#d48711;
 }
 
 .grass{
@@ -144,10 +196,7 @@ button{
     width:88px;
     height:118px;
     z-index:10;
-    transition:
-    opacity .25s,
-    transform .25s,
-    filter .2s;
+    transition:opacity .25s,transform .25s,filter .2s;
 }
 
 .tree-shadow{
@@ -168,13 +217,7 @@ button{
     width:20px;
     height:48px;
     border-radius:5px;
-    background:
-    linear-gradient(
-        90deg,
-        #5b3418,
-        #9a6530,
-        #68401f
-    );
+    background:linear-gradient(90deg,#5b3418,#9a6530,#68401f);
 }
 
 .tree-layer{
@@ -221,21 +264,7 @@ button{
         inset -9px -8px 0 rgba(0,0,0,.14),
         0 9px 12px rgba(0,0,0,.25);
     z-index:9;
-    transition:
-    opacity .25s,
-    transform .25s,
-    filter .2s;
-}
-
-.rock::before{
-    content:"";
-    position:absolute;
-    width:20px;
-    height:13px;
-    left:10px;
-    top:8px;
-    border-radius:50%;
-    background:rgba(255,255,255,.18);
+    transition:opacity .25s,transform .25s,filter .2s;
 }
 
 .rock.near{
@@ -262,7 +291,6 @@ button{
     border-left:85px solid transparent;
     border-right:85px solid transparent;
     border-bottom:66px solid #d19755;
-    filter:drop-shadow(0 5px 3px rgba(0,0,0,.2));
 }
 
 .hut-door{
@@ -285,18 +313,11 @@ button{
     background:#ffc95d;
 }
 
-.hut-fire{
-    position:absolute;
-    left:-35px;
-    bottom:-8px;
-    font-size:34px;
-    filter:drop-shadow(0 0 8px orange);
-}
-
-.hut-level{
+.hut-level,
+.building-label{
     position:absolute;
     left:50%;
-    top:-88px;
+    top:-45px;
     transform:translateX(-50%);
     background:rgba(11,15,12,.94);
     border:1px solid #3d493f;
@@ -304,6 +325,48 @@ button{
     border-radius:10px;
     font-size:11px;
     white-space:nowrap;
+}
+
+.hut .hut-level{
+    top:-88px;
+}
+
+.lumberMill{
+    position:absolute;
+    width:155px;
+    height:110px;
+    background:#79502d;
+    border:4px solid #4c321f;
+    border-radius:12px;
+    z-index:15;
+    box-shadow:0 14px 20px rgba(0,0,0,.35);
+}
+
+.lumberMill::before{
+    content:"🪵";
+    position:absolute;
+    font-size:62px;
+    left:42px;
+    top:15px;
+}
+
+.quarry{
+    position:absolute;
+    width:155px;
+    height:110px;
+    background:#5f6668;
+    border:4px solid #353a3c;
+    border-radius:12px;
+    z-index:15;
+    box-shadow:0 14px 20px rgba(0,0,0,.35);
+}
+
+.quarry::before{
+    content:"⛏️";
+    position:absolute;
+    font-size:62px;
+    left:42px;
+    top:15px;
 }
 
 #topbar{
@@ -319,7 +382,6 @@ button{
     overflow-x:auto;
     background:linear-gradient(180deg,rgba(9,12,10,.98),rgba(9,12,10,.87));
     border-bottom:1px solid rgba(255,255,255,.10);
-    box-shadow:0 6px 20px rgba(0,0,0,.25);
 }
 
 .logo{
@@ -327,7 +389,6 @@ button{
     font-weight:900;
     color:#ffa126;
     font-size:16px;
-    letter-spacing:.5px;
 }
 
 .stat{
@@ -353,10 +414,6 @@ button{
     border:1px solid #2e3930;
     border-radius:12px;
     padding:7px 10px;
-}
-
-#playerCard strong{
-    font-size:13px;
 }
 
 .xpbar,
@@ -391,18 +448,11 @@ button{
     border-radius:14px;
     background:rgba(15,19,16,.92);
     border:1px solid #39453a;
-    box-shadow:0 8px 20px rgba(0,0,0,.30);
-}
-
-#missions h3{
-    font-size:14px;
-    margin-bottom:9px;
 }
 
 .mission{
     padding:6px 0;
     font-size:11px;
-    color:#d9dfda;
 }
 
 .mission span{
@@ -421,28 +471,13 @@ button{
     overflow:hidden;
     background:#294f2d;
     border:4px solid rgba(15,18,16,.9);
-    box-shadow:0 7px 18px rgba(0,0,0,.4);
 }
 
 #miniMapInner{
     position:relative;
     width:100%;
     height:100%;
-    background:
-    linear-gradient(
-        90deg,
-        transparent 47%,
-        #94734a 47%,
-        #94734a 53%,
-        transparent 53%
-    ),
-    linear-gradient(
-        transparent 47%,
-        #94734a 47%,
-        #94734a 53%,
-        transparent 53%
-    ),
-    #3e7139;
+    background:#3e7139;
 }
 
 #miniPlayer{
@@ -474,7 +509,6 @@ button{
     color:white;
     font-size:11px;
     font-weight:bold;
-    box-shadow:0 6px 13px rgba(0,0,0,.3);
 }
 
 .sideBtn.upgrade{
@@ -494,7 +528,6 @@ button{
     padding:9px 14px;
     border-radius:12px;
     font-size:12px;
-    box-shadow:0 8px 18px rgba(0,0,0,.3);
 }
 
 #joystickBase{
@@ -517,7 +550,6 @@ button{
     top:36px;
     border-radius:50%;
     background:rgba(255,255,255,.35);
-    box-shadow:0 5px 12px rgba(0,0,0,.3);
 }
 
 #collect{
@@ -533,11 +565,6 @@ button{
     font-weight:900;
     font-size:12px;
     z-index:250;
-    box-shadow:0 10px 25px rgba(0,0,0,.45);
-}
-
-#collect:active{
-    transform:scale(.95);
 }
 
 .panel{
@@ -547,7 +574,7 @@ button{
     top:50%;
     transform:translate(-50%,-50%);
     width:90%;
-    max-width:390px;
+    max-width:410px;
     max-height:80vh;
     overflow:auto;
     z-index:600;
@@ -555,16 +582,10 @@ button{
     border-radius:18px;
     background:#121713;
     border:1px solid #3b473d;
-    box-shadow:0 30px 80px rgba(0,0,0,.65);
 }
 
 .panel.show{
     display:block;
-}
-
-.panel h2{
-    margin-bottom:14px;
-    font-size:20px;
 }
 
 .card{
@@ -575,12 +596,6 @@ button{
     margin-bottom:10px;
     font-size:13px;
     line-height:1.55;
-}
-
-.card strong{
-    display:block;
-    margin-bottom:7px;
-    font-size:14px;
 }
 
 .panelBtn{
@@ -616,11 +631,6 @@ button{
     text-align:center;
 }
 
-.inventory-item .icon{
-    font-size:32px;
-    margin-bottom:7px;
-}
-
 #message{
     position:absolute;
     left:50%;
@@ -647,7 +657,6 @@ button{
     transform:translateX(-50%);
     z-index:500;
     font-size:10px;
-    color:#d7e2d8;
     background:rgba(0,0,0,.45);
     padding:4px 9px;
     border-radius:20px;
@@ -662,13 +671,12 @@ button{
 @media(max-width:700px){
 
     #missions{
-        width:190px;
-        top:80px;
+        width:185px;
     }
 
     #miniMap{
-        width:100px;
-        height:100px;
+        width:95px;
+        height:95px;
     }
 
     #sideMenu{
@@ -681,15 +689,6 @@ button{
         font-size:10px;
     }
 
-    .logo{
-        min-width:105px;
-        font-size:14px;
-    }
-
-    .stat{
-        min-width:80px;
-    }
-
 }
 
 </style>
@@ -699,385 +698,392 @@ button{
 
 <div id="game">
 
-    <div id="world">
+<div id="world">
 
-        <div class="path horizontal"></div>
-        <div class="path vertical"></div>
+<div class="path horizontal"></div>
+<div class="path vertical"></div>
 
-    </div>
+<div id="lockedArea">
+    <div class="lockedBox">
 
-    <div id="topbar">
+        <h2>🔒 Área Bloqueada</h2>
 
-        <div class="logo">
-            SURVIVAL SOUZA
-        </div>
+        <p>
+            Expanda seu território para liberar novas construções.
+        </p>
 
-        <div class="stat">
-            Madeira
-            <strong>🪵 <span id="wood">0</span></strong>
-        </div>
+        <strong>
+            💰 R$ 500
+        </strong>
 
-        <div class="stat">
-            Pedra
-            <strong>🪨 <span id="stone">0</span></strong>
-        </div>
-
-        <div class="stat">
-            Comida
-            <strong>🍖 <span id="food">3</span></strong>
-        </div>
-
-        <div class="stat">
-            Dinheiro
-            <strong>💰 R$ <span id="money">100</span></strong>
-        </div>
-
-        <div id="playerCard">
-
-            <strong>
-                VinyCeo • Nv.
-                <span id="level">1</span>
-            </strong>
-
-            <div class="xpbar">
-                <div id="xpfill"></div>
-            </div>
-
-            <div style="font-size:9px;margin-top:3px;">
-                XP:
-                <span id="xp">0</span>
-                /100
-            </div>
-
-            <div style="margin-top:5px;font-size:9px;">
-                🍖 Fome
-            </div>
-
-            <div class="hungerbar">
-                <div id="hungerfill"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div id="saveStatus">
-        💾 Jogo salvo
-    </div>
-
-    <div id="missions">
-
-        <h3>🎯 Missões</h3>
-
-        <div class="mission">
-            Colete 20 madeiras
-            <span id="missionWood">0/20</span>
-        </div>
-
-        <div class="mission">
-            Construa barraca
-            <span id="missionHut">0/1</span>
-        </div>
-
-        <div class="mission">
-            Ganhe R$ 200
-            <span id="missionMoney">100/200</span>
-        </div>
-
-    </div>
-
-    <div id="miniMap">
-
-        <div id="miniMapInner">
-
-            <div id="miniPlayer"></div>
-
-        </div>
-
-    </div>
-
-    <div id="sideMenu">
-
-        <button class="sideBtn" id="btnBuild">
-            🔨 Construir
-        </button>
-
-        <button class="sideBtn upgrade" id="btnUpgrade">
-            ⬆️ Melhorias
-        </button>
-
-        <button class="sideBtn" id="btnInventory">
-            🎒 Inventário
-        </button>
-
-        <button class="sideBtn" id="btnShop">
-            🛒 Loja
-        </button>
-
-        <button class="sideBtn" id="btnMissionToggle">
-            📜 Missões
+        <button id="unlockArea">
+            DESBLOQUEAR
         </button>
 
     </div>
+</div>
 
-    <div id="nearInfo"></div>
+</div>
 
-    <div id="joystickBase">
-        <div id="joystickKnob"></div>
-    </div>
+<div id="topbar">
 
-    <button id="collect">
-        ✋
-        <br>
-        COLETAR
-    </button>
+<div class="logo">
+SURVIVAL SOUZA
+</div>
 
-    <div id="message"></div>
+<div class="stat">
+Madeira
+<strong>🪵 <span id="wood">0</span></strong>
+</div>
 
-    <div class="panel" id="buildPanel">
+<div class="stat">
+Pedra
+<strong>🪨 <span id="stone">0</span></strong>
+</div>
 
-        <h2>🔨 Construções</h2>
+<div class="stat">
+Comida
+<strong>🍖 <span id="food">3</span></strong>
+</div>
 
-        <div class="card">
+<div class="stat">
+Dinheiro
+<strong>💰 R$ <span id="money">100</span></strong>
+</div>
 
-            <strong>🛖 Barraca</strong>
+<div id="playerCard">
 
-            Estrutura inicial da sua base.
+<strong>
+VinyCeo • Nv. <span id="level">1</span>
+</strong>
 
-            <br><br>
+<div class="xpbar">
+<div id="xpfill"></div>
+</div>
 
-            🪵 10 Madeira
-            <br>
-            🪨 5 Pedra
+<div style="font-size:9px;">
+XP <span id="xp">0</span>/100
+</div>
 
-            <br><br>
+<div style="font-size:9px;margin-top:4px;">
+🍖 Fome
+</div>
 
-            💰 Produção:
-            R$ 2 / 5s
+<div class="hungerbar">
+<div id="hungerfill"></div>
+</div>
 
-            <button class="panelBtn" id="buildHut">
-                CONSTRUIR
-            </button>
+</div>
 
-        </div>
+</div>
 
-        <button class="panelBtn dark closePanel">
-            FECHAR
-        </button>
+<div id="saveStatus">
+💾 Jogo salvo
+</div>
 
-    </div>
+<div id="missions">
 
-    <div class="panel" id="upgradePanel">
+<h3>🎯 Missões</h3>
 
-        <h2>⬆️ Melhorias</h2>
+<div class="mission">
+Colete 20 madeiras
+<span id="missionWood">0/20</span>
+</div>
 
-        <div class="card">
+<div class="mission">
+Barraca Nível 3
+<span id="missionHut">0/3</span>
+</div>
 
-            <strong>🏃 Velocidade</strong>
+<div class="mission">
+Desbloqueie nova área
+<span id="missionArea">0/1</span>
+</div>
 
-            Nível:
-            <span id="speedLevel">1</span>
+<div class="mission">
+Construa Serraria
+<span id="missionLumber">0/1</span>
+</div>
 
-            <br>
+</div>
 
-            Você anda mais rápido.
+<div id="miniMap">
+<div id="miniMapInner">
+<div id="miniPlayer"></div>
+</div>
+</div>
 
-            <button class="panelBtn" id="upgradeSpeed">
-                Melhorar — R$ 100
-            </button>
+<div id="sideMenu">
 
-        </div>
+<button class="sideBtn" id="btnBuild">
+🔨 Construir
+</button>
 
-        <div class="card">
+<button class="sideBtn upgrade" id="btnUpgrade">
+⬆️ Melhorias
+</button>
 
-            <strong>🪓 Coleta</strong>
+<button class="sideBtn" id="btnInventory">
+🎒 Inventário
+</button>
 
-            Nível:
-            <span id="collectLevel">1</span>
+<button class="sideBtn" id="btnShop">
+🛒 Loja
+</button>
 
-            <br>
+<button class="sideBtn" id="btnMissions">
+📜 Missões
+</button>
 
-            Recebe mais recursos.
+</div>
 
-            <button class="panelBtn" id="upgradeCollect">
-                Melhorar — R$ 150
-            </button>
+<div id="nearInfo"></div>
 
-        </div>
+<div id="joystickBase">
+<div id="joystickKnob"></div>
+</div>
 
-        <div class="card">
+<button id="collect">
+✋<br>COLETAR
+</button>
 
-            <strong>💰 Produção</strong>
+<div id="message"></div>
 
-            Nível:
-            <span id="incomeLevel">1</span>
+<!-- BUILD -->
 
-            <br>
+<div class="panel" id="buildPanel">
 
-            Aumenta renda da barraca.
+<h2>🔨 Construções</h2>
 
-            <button class="panelBtn" id="upgradeIncome">
-                Melhorar — R$ 200
-            </button>
+<div class="card">
 
-        </div>
+<strong>🛖 Barraca</strong>
 
-        <button class="panelBtn dark closePanel">
-            FECHAR
-        </button>
+<br>
 
-    </div>
+🪵 10 Madeira
+<br>
+🪨 5 Pedra
 
-    <div class="panel" id="inventoryPanel">
+<br><br>
 
-        <h2>🎒 Inventário</h2>
+<button class="panelBtn" id="buildHut">
+CONSTRUIR
+</button>
 
-        <div class="inventory-grid">
+</div>
 
-            <div class="inventory-item">
+<div class="card" id="lumberCard">
 
-                <div class="icon">🪵</div>
+<strong>🪵 Serraria</strong>
 
-                Madeira
+Gera madeira automaticamente.
 
-                <strong id="invWood">0</strong>
+<br><br>
 
-            </div>
+🪵 30 Madeira
+<br>
+🪨 15 Pedra
+<br>
+💰 R$ 200
 
-            <div class="inventory-item">
+<button class="panelBtn" id="buildLumber">
+CONSTRUIR SERRARIA
+</button>
 
-                <div class="icon">🪨</div>
+</div>
 
-                Pedra
+<div class="card" id="quarryCard">
 
-                <strong id="invStone">0</strong>
+<strong>⛏️ Pedreira</strong>
 
-            </div>
+Gera pedra automaticamente.
 
-            <div class="inventory-item">
+<br><br>
 
-                <div class="icon">🍖</div>
+🪵 25 Madeira
+<br>
+🪨 30 Pedra
+<br>
+💰 R$ 300
 
-                Comida
+<button class="panelBtn" id="buildQuarry">
+CONSTRUIR PEDREIRA
+</button>
 
-                <strong id="invFood">3</strong>
+</div>
 
-            </div>
+<button class="panelBtn dark closePanel">
+FECHAR
+</button>
 
-            <div class="inventory-item">
+</div>
 
-                <div class="icon">💰</div>
+<!-- UPGRADES -->
 
-                Dinheiro
+<div class="panel" id="upgradePanel">
 
-                <strong>
-                    R$ <span id="invMoney">100</span>
-                </strong>
+<h2>⬆️ Melhorias</h2>
 
-            </div>
+<div class="card">
 
-        </div>
+<strong>🛖 Barraca</strong>
 
-        <div class="card" style="margin-top:12px;">
+Nível:
+<span id="hutLevelText">0</span>
 
-            <strong>🍖 Comer</strong>
+<br>
 
-            Consome 1 comida e recupera fome.
+Renda:
+R$ <span id="hutIncomeText">0</span> / 5s
 
-            <button class="panelBtn orange" id="eatFood">
-                COMER
-            </button>
+<button class="panelBtn orange" id="upgradeHut">
+MELHORAR BARRACA
+</button>
 
-        </div>
+</div>
 
-        <button class="panelBtn dark closePanel">
-            FECHAR
-        </button>
+<div class="card">
 
-    </div>
+<strong>🏃 Velocidade</strong>
 
-    <div class="panel" id="shopPanel">
+Nível:
+<span id="speedLevel">1</span>
 
-        <h2>🛒 Loja</h2>
+<button class="panelBtn" id="upgradeSpeed">
+Melhorar
+</button>
 
-        <div class="card">
+</div>
 
-            <strong>🍖 Pacote de comida</strong>
+<div class="card">
 
-            +5 comidas
+<strong>🪓 Coleta</strong>
 
-            <br><br>
+Nível:
+<span id="collectLevel">1</span>
 
-            Preço: R$ 30
+<button class="panelBtn" id="upgradeCollect">
+Melhorar
+</button>
 
-            <button class="panelBtn orange" id="buyFood">
-                COMPRAR
-            </button>
+</div>
 
-        </div>
+<button class="panelBtn dark closePanel">
+FECHAR
+</button>
 
-        <div class="card">
+</div>
 
-            <strong>🪵 Madeira</strong>
+<!-- INVENTORY -->
 
-            +10 Madeira
+<div class="panel" id="inventoryPanel">
 
-            <br><br>
+<h2>🎒 Inventário</h2>
 
-            Preço: R$ 50
+<div class="inventory-grid">
 
-            <button class="panelBtn orange" id="buyWood">
-                COMPRAR
-            </button>
+<div class="inventory-item">
+🪵 Madeira
+<br>
+<strong id="invWood">0</strong>
+</div>
 
-        </div>
+<div class="inventory-item">
+🪨 Pedra
+<br>
+<strong id="invStone">0</strong>
+</div>
 
-        <div class="card">
+<div class="inventory-item">
+🍖 Comida
+<br>
+<strong id="invFood">3</strong>
+</div>
 
-            <strong>🪨 Pedra</strong>
+<div class="inventory-item">
+💰 Dinheiro
+<br>
+<strong>R$ <span id="invMoney">100</span></strong>
+</div>
 
-            +10 Pedra
+</div>
 
-            <br><br>
+<div class="card" style="margin-top:10px;">
 
-            Preço: R$ 60
+<strong>🍖 Comer</strong>
 
-            <button class="panelBtn orange" id="buyStone">
-                COMPRAR
-            </button>
+<button class="panelBtn orange" id="eatFood">
+COMER
+</button>
 
-        </div>
+</div>
 
-        <button class="panelBtn dark closePanel">
-            FECHAR
-        </button>
+<button class="panelBtn dark closePanel">
+FECHAR
+</button>
 
-    </div>
+</div>
+
+<!-- SHOP -->
+
+<div class="panel" id="shopPanel">
+
+<h2>🛒 Loja</h2>
+
+<div class="card">
+
+🍖 +5 comida
+<br>
+R$30
+
+<button class="panelBtn orange" id="buyFood">
+COMPRAR
+</button>
+
+</div>
+
+<div class="card">
+
+🪵 +10 madeira
+<br>
+R$50
+
+<button class="panelBtn orange" id="buyWood">
+COMPRAR
+</button>
+
+</div>
+
+<div class="card">
+
+🪨 +10 pedra
+<br>
+R$60
+
+<button class="panelBtn orange" id="buyStone">
+COMPRAR
+</button>
+
+</div>
+
+<button class="panelBtn dark closePanel">
+FECHAR
+</button>
+
+</div>
 
 </div>
 
 <script>
 
-const game = document.getElementById("game");
 const world = document.getElementById("world");
+const game = document.getElementById("game");
 
-const woodEl = document.getElementById("wood");
-const stoneEl = document.getElementById("stone");
-const foodEl = document.getElementById("food");
-const moneyEl = document.getElementById("money");
+const WORLD_SIZE = 2600;
 
-const message = document.getElementById("message");
-const nearInfo = document.getElementById("nearInfo");
-const saveStatus = document.getElementById("saveStatus");
-
-const joystickBase = document.getElementById("joystickBase");
-const joystickKnob = document.getElementById("joystickKnob");
-const miniPlayer = document.getElementById("miniPlayer");
-
-const WORLD_SIZE = 2400;
-
-let playerX = 1200;
-let playerY = 1200;
+let playerX = 1300;
+let playerY = 1300;
 
 let speed = 220;
 
@@ -1093,17 +1099,23 @@ let hunger = 100;
 
 let speedLevel = 1;
 let collectLevel = 1;
-let incomeLevel = 1;
-
 let collectAmount = 1;
 
 let hutBuilt = false;
-let hutIncome = 2;
+let hutLevel = 0;
 
 let hutX = null;
 let hutY = null;
 
-let hutObject = null;
+let lumberBuilt = false;
+let lumberX = null;
+let lumberY = null;
+
+let quarryBuilt = false;
+let quarryX = null;
+let quarryY = null;
+
+let areaUnlocked = false;
 
 let inputX = 0;
 let inputY = 0;
@@ -1118,15 +1130,15 @@ player.id = "player";
 
 world.appendChild(player);
 
-/* =========================
+const SAVE_KEY = "survivalSouzaSaveV2";
+
+/* ======================
 SAVE
-========================= */
+====================== */
 
-const SAVE_KEY = "survivalSouzaSaveV1";
+function saveGame(show = false){
 
-function salvarJogo(mostrarStatus = false){
-
-    const dados = {
+    const data = {
 
         playerX,
         playerY,
@@ -1144,597 +1156,375 @@ function salvarJogo(mostrarStatus = false){
 
         speedLevel,
         collectLevel,
-        incomeLevel,
-
         collectAmount,
 
         hutBuilt,
-        hutIncome,
-
+        hutLevel,
         hutX,
-        hutY
+        hutY,
+
+        lumberBuilt,
+        lumberX,
+        lumberY,
+
+        quarryBuilt,
+        quarryX,
+        quarryY,
+
+        areaUnlocked
 
     };
 
     localStorage.setItem(
         SAVE_KEY,
-        JSON.stringify(dados)
+        JSON.stringify(data)
     );
 
-    if(mostrarStatus){
+    if(show){
 
-        saveStatus.classList.add("show");
+        const status =
+        document.getElementById("saveStatus");
 
-        clearTimeout(
-            salvarJogo.statusTimer
-        );
+        status.classList.add("show");
 
-        salvarJogo.statusTimer =
         setTimeout(()=>{
-
-            saveStatus.classList.remove("show");
-
-        },1000);
+            status.classList.remove("show");
+        },900);
 
     }
 
 }
 
-function carregarJogo(){
+function loadGame(){
 
-    const salvo =
-    localStorage.getItem(
-        SAVE_KEY
-    );
+    const save =
+    localStorage.getItem(SAVE_KEY);
 
-    if(!salvo){
+    if(!save){
         return;
     }
 
     try{
 
-        const dados =
-        JSON.parse(salvo);
+        const d =
+        JSON.parse(save);
 
-        playerX =
-        dados.playerX ??
-        playerX;
+        playerX = d.playerX ?? playerX;
+        playerY = d.playerY ?? playerY;
 
-        playerY =
-        dados.playerY ??
-        playerY;
+        wood = d.wood ?? wood;
+        stone = d.stone ?? stone;
+        food = d.food ?? food;
+        money = d.money ?? money;
 
-        wood =
-        dados.wood ??
-        wood;
+        xp = d.xp ?? xp;
+        level = d.level ?? level;
+        hunger = d.hunger ?? hunger;
 
-        stone =
-        dados.stone ??
-        stone;
-
-        food =
-        dados.food ??
-        food;
-
-        money =
-        dados.money ??
-        money;
-
-        xp =
-        dados.xp ??
-        xp;
-
-        level =
-        dados.level ??
-        level;
-
-        hunger =
-        dados.hunger ??
-        hunger;
-
-        speed =
-        dados.speed ??
-        speed;
+        speed = d.speed ?? speed;
 
         speedLevel =
-        dados.speedLevel ??
-        speedLevel;
+        d.speedLevel ?? speedLevel;
 
         collectLevel =
-        dados.collectLevel ??
-        collectLevel;
-
-        incomeLevel =
-        dados.incomeLevel ??
-        incomeLevel;
+        d.collectLevel ?? collectLevel;
 
         collectAmount =
-        dados.collectAmount ??
-        collectAmount;
+        d.collectAmount ?? collectAmount;
 
         hutBuilt =
-        dados.hutBuilt ??
-        hutBuilt;
+        d.hutBuilt ?? hutBuilt;
 
-        hutIncome =
-        dados.hutIncome ??
-        hutIncome;
+        hutLevel =
+        d.hutLevel ?? hutLevel;
 
         hutX =
-        dados.hutX ??
-        hutX;
+        d.hutX ?? hutX;
 
         hutY =
-        dados.hutY ??
-        hutY;
+        d.hutY ?? hutY;
+
+        lumberBuilt =
+        d.lumberBuilt ?? lumberBuilt;
+
+        lumberX =
+        d.lumberX ?? lumberX;
+
+        lumberY =
+        d.lumberY ?? lumberY;
+
+        quarryBuilt =
+        d.quarryBuilt ?? quarryBuilt;
+
+        quarryX =
+        d.quarryX ?? quarryX;
+
+        quarryY =
+        d.quarryY ?? quarryY;
+
+        areaUnlocked =
+        d.areaUnlocked ?? areaUnlocked;
 
     }
-    catch(error){
+    catch(e){
 
         console.error(
-            "Erro ao carregar save:",
-            error
+            "Erro no save",
+            e
         );
 
     }
 
 }
 
-/* =========================
+/* ======================
 MESSAGE
-========================= */
+====================== */
 
-function showMessage(text){
+function message(text){
 
-    message.textContent = text;
+    const el =
+    document.getElementById("message");
 
-    message.classList.add(
-        "show"
-    );
+    el.textContent = text;
+
+    el.classList.add("show");
 
     clearTimeout(
-        showMessage.timer
+        message.timer
     );
 
-    showMessage.timer =
+    message.timer =
     setTimeout(()=>{
 
-        message.classList.remove(
-            "show"
-        );
+        el.classList.remove("show");
 
-    },1400);
+    },1300);
 
 }
 
-/* =========================
+/* ======================
 HUD
-========================= */
+====================== */
 
 function updateHUD(){
 
-    woodEl.textContent = wood;
-    stoneEl.textContent = stone;
-    foodEl.textContent = food;
-    moneyEl.textContent = money;
+    document.getElementById("wood").textContent = wood;
+    document.getElementById("stone").textContent = stone;
+    document.getElementById("food").textContent = food;
+    document.getElementById("money").textContent = money;
 
-    document
-    .getElementById(
-        "invWood"
-    )
-    .textContent =
-    wood;
+    document.getElementById("invWood").textContent = wood;
+    document.getElementById("invStone").textContent = stone;
+    document.getElementById("invFood").textContent = food;
+    document.getElementById("invMoney").textContent = money;
 
-    document
-    .getElementById(
-        "invStone"
-    )
-    .textContent =
-    stone;
+    document.getElementById("xp").textContent = xp;
+    document.getElementById("level").textContent = level;
 
-    document
-    .getElementById(
-        "invFood"
-    )
-    .textContent =
-    food;
+    document.getElementById("xpfill").style.width =
+    Math.min(xp,100)+"%";
 
-    document
-    .getElementById(
-        "invMoney"
-    )
-    .textContent =
-    money;
+    document.getElementById("hungerfill").style.width =
+    hunger+"%";
 
-    document
-    .getElementById(
-        "xp"
-    )
-    .textContent =
-    xp;
-
-    document
-    .getElementById(
-        "level"
-    )
-    .textContent =
-    level;
-
-    document
-    .getElementById(
-        "xpfill"
-    )
-    .style.width =
-    Math.min(
-        xp,
-        100
-    ) + "%";
-
-    document
-    .getElementById(
-        "hungerfill"
-    )
-    .style.width =
-    hunger + "%";
-
-    document
-    .getElementById(
-        "missionWood"
-    )
-    .textContent =
-    Math.min(
-        wood,
-        20
-    ) + "/20";
-
-    document
-    .getElementById(
-        "missionHut"
-    )
-    .textContent =
-    hutBuilt
-    ? "1/1"
-    : "0/1";
-
-    document
-    .getElementById(
-        "missionMoney"
-    )
-    .textContent =
-    Math.min(
-        money,
-        200
-    ) + "/200";
-
-    atualizarUpgradesUI();
-
-}
-
-function atualizarUpgradesUI(){
-
-    document
-    .getElementById(
-        "speedLevel"
-    )
-    .textContent =
+    document.getElementById("speedLevel").textContent =
     speedLevel;
 
-    document
-    .getElementById(
-        "collectLevel"
-    )
-    .textContent =
+    document.getElementById("collectLevel").textContent =
     collectLevel;
 
-    document
-    .getElementById(
-        "incomeLevel"
-    )
-    .textContent =
-    incomeLevel;
+    document.getElementById("hutLevelText").textContent =
+    hutLevel;
 
-    document
-    .getElementById(
-        "upgradeSpeed"
-    )
-    .textContent =
-    "Melhorar — R$ " +
-    (
-        100 *
-        speedLevel
-    );
+    document.getElementById("hutIncomeText").textContent =
+    getHutIncome();
 
-    document
-    .getElementById(
-        "upgradeCollect"
-    )
-    .textContent =
-    "Melhorar — R$ " +
-    (
-        150 *
-        collectLevel
-    );
+    document.getElementById("missionWood").textContent =
+    Math.min(wood,20)+"/20";
 
-    document
-    .getElementById(
-        "upgradeIncome"
-    )
-    .textContent =
-    "Melhorar — R$ " +
-    (
-        200 *
-        incomeLevel
-    );
+    document.getElementById("missionHut").textContent =
+    Math.min(hutLevel,3)+"/3";
+
+    document.getElementById("missionArea").textContent =
+    areaUnlocked ? "1/1" : "0/1";
+
+    document.getElementById("missionLumber").textContent =
+    lumberBuilt ? "1/1" : "0/1";
+
+    document.getElementById("lumberCard").style.opacity =
+    areaUnlocked ? "1" : ".45";
+
+    document.getElementById("quarryCard").style.opacity =
+    areaUnlocked ? "1" : ".45";
 
 }
 
-/* =========================
+/* ======================
 XP
-========================= */
+====================== */
 
 function addXP(amount){
 
     xp += amount;
 
-    while(
-        xp >= 100
-    ){
+    if(xp >= 100){
 
         xp -= 100;
 
         level++;
 
-        showMessage(
-            "🎉 Nível " +
-            level +
-            "!"
+        message(
+            "🎉 Nível "+level
         );
 
     }
 
 }
 
-/* =========================
-TREE
-========================= */
-
-function createTreeElement(){
-
-    const tree =
-    document.createElement(
-        "div"
-    );
-
-    tree.className =
-    "tree";
-
-    tree.innerHTML = `
-
-        <div class="tree-shadow"></div>
-
-        <div class="tree-trunk"></div>
-
-        <div class="tree-layer one"></div>
-
-        <div class="tree-layer two"></div>
-
-        <div class="tree-layer three"></div>
-
-    `;
-
-    return tree;
-
-}
+/* ======================
+MAP RESOURCES
+====================== */
 
 function addTree(x,y){
 
-    const tree =
-    createTreeElement();
+    const el =
+    document.createElement("div");
 
-    tree.style.left =
-    x + "px";
+    el.className =
+    "tree";
 
-    tree.style.top =
-    y + "px";
+    el.innerHTML = `
+        <div class="tree-shadow"></div>
+        <div class="tree-trunk"></div>
+        <div class="tree-layer one"></div>
+        <div class="tree-layer two"></div>
+        <div class="tree-layer three"></div>
+    `;
 
-    world.appendChild(
-        tree
-    );
+    el.style.left =
+    x+"px";
+
+    el.style.top =
+    y+"px";
+
+    world.appendChild(el);
 
     resources.push({
 
         type:"tree",
         x,
         y,
-        health:3,
+        hp:3,
         active:true,
-        respawning:false,
-        el:tree
+        el
 
     });
 
 }
 
-/* =========================
-ROCK
-========================= */
-
 function addRock(x,y){
 
-    const rock =
-    document.createElement(
-        "div"
-    );
+    const el =
+    document.createElement("div");
 
-    rock.className =
+    el.className =
     "rock";
 
-    rock.style.left =
-    x + "px";
+    el.style.left =
+    x+"px";
 
-    rock.style.top =
-    y + "px";
+    el.style.top =
+    y+"px";
 
-    world.appendChild(
-        rock
-    );
+    world.appendChild(el);
 
     resources.push({
 
         type:"rock",
         x,
         y,
-        health:4,
+        hp:4,
         active:true,
-        respawning:false,
-        el:rock
+        el
 
     });
 
 }
 
-/* =========================
-MAPA
-========================= */
-
-for(
-let i = 0;
-i < 40;
-i++
-){
+for(let i=0;i<45;i++){
 
     addTree(
-
-        200 +
-        Math.random() *
-        1950,
-
-        200 +
-        Math.random() *
-        1950
-
+        150+Math.random()*2200,
+        150+Math.random()*2200
     );
 
 }
 
-for(
-let i = 0;
-i < 20;
-i++
-){
+for(let i=0;i<22;i++){
 
     addRock(
-
-        250 +
-        Math.random() *
-        1900,
-
-        250 +
-        Math.random() *
-        1900
-
+        150+Math.random()*2200,
+        150+Math.random()*2200
     );
 
 }
 
-for(
-let i = 0;
-i < 55;
-i++
-){
+for(let i=0;i<60;i++){
 
-    const grass =
-    document.createElement(
-        "div"
-    );
+    const g =
+    document.createElement("div");
 
-    grass.className =
+    g.className =
     "grass";
 
-    grass.style.left =
-    (
-        100 +
-        Math.random() *
-        2150
-    ) + "px";
+    g.style.left =
+    (100+Math.random()*2300)+"px";
 
-    grass.style.top =
-    (
-        100 +
-        Math.random() *
-        2150
-    ) + "px";
+    g.style.top =
+    (100+Math.random()*2300)+"px";
 
-    world.appendChild(
-        grass
-    );
+    world.appendChild(g);
 
 }
 
-for(
-let i = 0;
-i < 30;
-i++
-){
+for(let i=0;i<35;i++){
 
-    const bush =
-    document.createElement(
-        "div"
-    );
+    const b =
+    document.createElement("div");
 
-    bush.className =
+    b.className =
     "bush";
 
-    bush.style.left =
-    (
-        120 +
-        Math.random() *
-        2100
-    ) + "px";
+    b.style.left =
+    (100+Math.random()*2300)+"px";
 
-    bush.style.top =
-    (
-        120 +
-        Math.random() *
-        2100
-    ) + "px";
+    b.style.top =
+    (100+Math.random()*2300)+"px";
 
-    world.appendChild(
-        bush
-    );
+    world.appendChild(b);
 
 }
 
-/* =========================
-BARRACA
-========================= */
+/* ======================
+BUILDING VISUALS
+====================== */
 
-function criarBarracaVisual(){
+function createHut(){
 
-    if(
-        !hutBuilt ||
-        hutObject
-    ){
+    if(!hutBuilt){
         return;
     }
 
-    if(
-        hutX === null ||
-        hutY === null
-    ){
-
-        hutX =
-        playerX + 140;
-
-        hutY =
-        playerY - 30;
-
+    if(document.getElementById("hutBuilding")){
+        return;
     }
 
     const hut =
-    document.createElement(
-        "div"
-    );
+    document.createElement("div");
+
+    hut.id =
+    "hutBuilding";
 
     hut.className =
     "hut";
@@ -1747,257 +1537,211 @@ function criarBarracaVisual(){
 
         <div class="hut-window"></div>
 
-        <div class="hut-fire">
-            🔥
-        </div>
-
         <div class="hut-level">
-            🛖 Barraca • Nível 1
+            🛖 Barraca • Nv.
+            <span id="hutWorldLevel">${hutLevel}</span>
         </div>
 
     `;
 
     hut.style.left =
-    hutX + "px";
+    hutX+"px";
 
     hut.style.top =
-    hutY + "px";
+    hutY+"px";
 
-    world.appendChild(
-        hut
-    );
-
-    hutObject = {
-
-        el:hut,
-        x:hutX,
-        y:hutY
-
-    };
+    world.appendChild(hut);
 
 }
 
-/* =========================
-DISTÂNCIA
-========================= */
+function updateHutVisual(){
 
-function getDistance(
-ax,
-ay,
-bx,
-by
-){
-
-    return Math.hypot(
-        ax - bx,
-        ay - by
+    const el =
+    document.getElementById(
+        "hutWorldLevel"
     );
+
+    if(el){
+
+        el.textContent =
+        hutLevel;
+
+    }
 
 }
 
-/* =========================
-RECURSO PRÓXIMO
-========================= */
+function createLumber(){
+
+    if(!lumberBuilt){
+        return;
+    }
+
+    if(document.getElementById("lumberBuilding")){
+        return;
+    }
+
+    const el =
+    document.createElement("div");
+
+    el.id =
+    "lumberBuilding";
+
+    el.className =
+    "lumberMill";
+
+    el.innerHTML = `
+        <div class="building-label">
+            🪵 Serraria
+        </div>
+    `;
+
+    el.style.left =
+    lumberX+"px";
+
+    el.style.top =
+    lumberY+"px";
+
+    world.appendChild(el);
+
+}
+
+function createQuarry(){
+
+    if(!quarryBuilt){
+        return;
+    }
+
+    if(document.getElementById("quarryBuilding")){
+        return;
+    }
+
+    const el =
+    document.createElement("div");
+
+    el.id =
+    "quarryBuilding";
+
+    el.className =
+    "quarry";
+
+    el.innerHTML = `
+        <div class="building-label">
+            ⛏️ Pedreira
+        </div>
+    `;
+
+    el.style.left =
+    quarryX+"px";
+
+    el.style.top =
+    quarryY+"px";
+
+    world.appendChild(el);
+
+}
+
+/* ======================
+NEAREST RESOURCE
+====================== */
 
 function nearestResource(){
 
-    let nearest =
-    null;
+    let nearest = null;
+    let distance = Infinity;
 
-    let smallest =
-    Infinity;
+    resources.forEach(r=>{
 
-    resources.forEach(
-    resource=>{
-
-        if(
-            !resource.active
-        ){
+        if(!r.active){
             return;
         }
 
-        const distance =
-        getDistance(
-
-            playerX,
-            playerY,
-
-            resource.x,
-            resource.y
-
+        const d =
+        Math.hypot(
+            playerX-r.x,
+            playerY-r.y
         );
 
-        if(
-            distance <
-            smallest
-        ){
+        if(d < distance){
 
-            smallest =
-            distance;
-
-            nearest =
-            resource;
+            distance = d;
+            nearest = r;
 
         }
 
     });
 
-    if(
-        smallest <= 105
-    ){
-
+    if(distance <= 110){
         return nearest;
-
     }
 
     return null;
 
 }
 
-let previousNear =
-null;
+let previousNear = null;
 
-function updateNearResource(){
+function nearUpdate(){
 
-    const resource =
+    const r =
     nearestResource();
 
     if(
         previousNear &&
-        previousNear !==
-        resource
+        previousNear !== r
     ){
 
         previousNear.el
         .classList
-        .remove(
-            "near"
-        );
+        .remove("near");
 
     }
 
-    if(
-        !resource
-    ){
+    if(!r){
 
-        nearInfo.style.display =
+        document.getElementById(
+            "nearInfo"
+        ).style.display =
         "none";
 
-        previousNear =
-        null;
+        previousNear = null;
 
         return;
 
     }
 
-    resource.el
-    .classList
-    .add(
-        "near"
+    previousNear = r;
+
+    r.el.classList.add("near");
+
+    const info =
+    document.getElementById(
+        "nearInfo"
     );
 
-    previousNear =
-    resource;
-
-    nearInfo.style.display =
+    info.style.display =
     "block";
 
-    if(
-        resource.type ===
-        "tree"
-    ){
-
-        nearInfo.innerHTML =
-        "🌲 Árvore • pressione COLETAR";
-
-    }
-
-    if(
-        resource.type ===
-        "rock"
-    ){
-
-        nearInfo.innerHTML =
-        "🪨 Pedra • pressione COLETAR";
-
-    }
+    info.textContent =
+    r.type === "tree"
+    ? "🌲 Árvore • COLETAR"
+    : "🪨 Pedra • COLETAR";
 
 }
 
-/* =========================
-RESPAWN
-========================= */
+/* ======================
+COLLECT
+====================== */
 
-function respawnResource(
-resource
-){
-
-    if(
-        resource.respawning
-    ){
-        return;
-    }
-
-    resource.respawning =
-    true;
-
-    setTimeout(()=>{
-
-        resource.health =
-        resource.type ===
-        "tree"
-        ? 3
-        : 4;
-
-        resource.active =
-        true;
-
-        resource.respawning =
-        false;
-
-        resource.el.style.opacity =
-        "0";
-
-        resource.el.style.transform =
-        "scale(.5)";
-
-        resource.el.style.display =
-        "block";
-
-        setTimeout(()=>{
-
-            resource.el.style.opacity =
-            "1";
-
-            resource.el.style.transform =
-            "scale(1)";
-
-        },30);
-
-    },12000);
-
-}
-
-/* =========================
-COLETA
-========================= */
-
-document
-.getElementById(
+document.getElementById(
     "collect"
-)
-.addEventListener(
-"click",
-()=>{
+).onclick = ()=>{
 
-    const resource =
+    const r =
     nearestResource();
 
-    if(
-        !resource
-    ){
+    if(!r){
 
-        showMessage(
+        message(
             "Chegue perto de um recurso."
         );
 
@@ -2005,138 +1749,109 @@ document
 
     }
 
-    resource.health--;
+    r.hp--;
 
-    if(
-        resource.type ===
-        "tree"
-    ){
+    if(r.type === "tree"){
 
         wood +=
         collectAmount;
 
         addXP(3);
 
-        showMessage(
-            "+" +
-            collectAmount +
-            " Madeira"
+        message(
+            "+"+
+            collectAmount+
+            " madeira"
         );
 
     }
-
-    if(
-        resource.type ===
-        "rock"
-    ){
+    else{
 
         stone +=
         collectAmount;
 
         addXP(4);
 
-        showMessage(
-            "+" +
-            collectAmount +
-            " Pedra"
+        message(
+            "+"+
+            collectAmount+
+            " pedra"
         );
 
     }
 
-    if(
-        resource.health <=
-        0
-    ){
+    if(r.hp <= 0){
 
-        resource.active =
-        false;
+        r.active = false;
 
-        resource.el.style.opacity =
-        "0";
-
-        resource.el.style.transform =
-        "scale(.5)";
+        r.el.style.display =
+        "none";
 
         setTimeout(()=>{
 
-            resource.el.style.display =
-            "none";
+            r.hp =
+            r.type === "tree"
+            ? 3
+            : 4;
 
-        },250);
+            r.active =
+            true;
 
-        respawnResource(
-            resource
-        );
+            r.el.style.display =
+            "block";
+
+        },12000);
 
     }
 
     updateHUD();
+    saveGame();
 
-    salvarJogo();
+};
 
-});
-
-/* =========================
-PAINÉIS
-========================= */
+/* ======================
+PANELS
+====================== */
 
 function openPanel(id){
 
-    document
-    .querySelectorAll(
+    document.querySelectorAll(
         ".panel"
-    )
-    .forEach(
-    panel=>{
-
-        panel.classList.remove(
-            "show"
-        );
-
-    });
+    ).forEach(p=>
+        p.classList.remove("show")
+    );
 
     document
-    .getElementById(
-        id
-    )
-    .classList.add(
-        "show"
-    );
+    .getElementById(id)
+    .classList
+    .add("show");
 
 }
 
-document
-.getElementById(
+document.getElementById(
     "btnBuild"
-)
-.onclick =
+).onclick =
 ()=>openPanel(
     "buildPanel"
 );
 
-document
-.getElementById(
+document.getElementById(
     "btnUpgrade"
-)
-.onclick =
+).onclick =
 ()=>openPanel(
     "upgradePanel"
 );
 
-document
-.getElementById(
+document.getElementById(
     "btnInventory"
-)
-.onclick =
+).onclick =
 ()=>openPanel(
     "inventoryPanel"
 );
 
-document
-.getElementById(
+document.getElementById(
     "btnShop"
-)
-.onclick =
+).onclick =
 ()=>openPanel(
     "shopPanel"
 );
@@ -2145,71 +1860,109 @@ document
 .querySelectorAll(
     ".closePanel"
 )
-.forEach(
-button=>{
+.forEach(btn=>{
 
-    button.onclick =
-    ()=>{
+    btn.onclick = ()=>{
 
-        document
-        .querySelectorAll(
+        document.querySelectorAll(
             ".panel"
-        )
-        .forEach(
-        panel=>{
-
-            panel.classList.remove(
-                "show"
-            );
-
-        });
+        ).forEach(p=>
+            p.classList.remove("show")
+        );
 
     };
 
 });
 
-/* =========================
-MISSÕES
-========================= */
+document.getElementById(
+    "btnMissions"
+).onclick = ()=>{
 
-document
-.getElementById(
-    "btnMissionToggle"
-)
-.onclick =
-()=>{
-
-    const missions =
-    document
-    .getElementById(
+    const el =
+    document.getElementById(
         "missions"
     );
 
-    missions.style.display =
-    missions.style.display ===
-    "none"
+    el.style.display =
+    el.style.display === "none"
     ? "block"
     : "none";
 
 };
 
-/* =========================
-CONSTRUIR BARRACA
-========================= */
+/* ======================
+AREA
+====================== */
 
-document
-.getElementById(
+function updateArea(){
+
+    const el =
+    document.getElementById(
+        "lockedArea"
+    );
+
+    if(areaUnlocked){
+
+        el.style.display =
+        "none";
+
+    }
+    else{
+
+        el.style.display =
+        "flex";
+
+    }
+
+}
+
+document.getElementById(
+    "unlockArea"
+).onclick = ()=>{
+
+    if(areaUnlocked){
+        return;
+    }
+
+    if(money < 500){
+
+        message(
+            "Você precisa de R$500."
+        );
+
+        return;
+
+    }
+
+    money -= 500;
+
+    areaUnlocked = true;
+
+    addXP(30);
+
+    updateArea();
+    updateHUD();
+
+    saveGame(true);
+
+    message(
+        "🗺️ Nova área desbloqueada!"
+    );
+
+};
+
+/* ======================
+HUT
+====================== */
+
+document.getElementById(
     "buildHut"
-)
-.onclick =
-()=>{
+).onclick = ()=>{
 
-    if(
-        hutBuilt
-    ){
+    if(hutBuilt){
 
-        showMessage(
-            "Você já possui uma barraca."
+        message(
+            "Sua barraca já foi construída."
         );
 
         return;
@@ -2221,8 +1974,8 @@ document
         stone < 5
     ){
 
-        showMessage(
-            "Precisa de 10 Madeira e 5 Pedra."
+        message(
+            "Precisa de 10 madeira e 5 pedra."
         );
 
         return;
@@ -2232,49 +1985,274 @@ document
     wood -= 10;
     stone -= 5;
 
-    hutBuilt =
-    true;
+    hutBuilt = true;
+    hutLevel = 1;
 
     hutX =
-    playerX + 140;
+    playerX + 150;
 
     hutY =
-    playerY - 30;
+    playerY - 50;
 
-    criarBarracaVisual();
+    createHut();
 
     addXP(20);
 
-    showMessage(
+    updateHUD();
+    saveGame(true);
+
+    message(
         "🛖 Barraca construída!"
     );
 
-    updateHUD();
+};
 
-    salvarJogo(true);
+function getHutIncome(){
+
+    if(!hutBuilt){
+        return 0;
+    }
+
+    if(hutLevel === 1){
+        return 2;
+    }
+
+    if(hutLevel === 2){
+        return 5;
+    }
+
+    return 10;
+
+}
+
+document.getElementById(
+    "upgradeHut"
+).onclick = ()=>{
+
+    if(!hutBuilt){
+
+        message(
+            "Construa sua barraca primeiro."
+        );
+
+        return;
+
+    }
+
+    if(hutLevel >= 3){
+
+        message(
+            "Barraca no nível máximo."
+        );
+
+        return;
+
+    }
+
+    if(hutLevel === 1){
+
+        if(
+            wood < 15 ||
+            stone < 10 ||
+            money < 100
+        ){
+
+            message(
+                "Nv.2: 15 madeira, 10 pedra e R$100."
+            );
+
+            return;
+
+        }
+
+        wood -= 15;
+        stone -= 10;
+        money -= 100;
+
+        hutLevel = 2;
+
+    }
+    else if(
+        hutLevel === 2
+    ){
+
+        if(
+            wood < 30 ||
+            stone < 20 ||
+            money < 300
+        ){
+
+            message(
+                "Nv.3: 30 madeira, 20 pedra e R$300."
+            );
+
+            return;
+
+        }
+
+        wood -= 30;
+        stone -= 20;
+        money -= 300;
+
+        hutLevel = 3;
+
+    }
+
+    updateHutVisual();
+
+    addXP(25);
+
+    updateHUD();
+    saveGame(true);
+
+    message(
+        "⬆️ Barraca melhorada!"
+    );
 
 };
 
-/* =========================
-UPGRADE SPEED
-========================= */
+/* ======================
+SERRARIA
+====================== */
 
-document
-.getElementById(
-    "upgradeSpeed"
-)
-.onclick =
-()=>{
+document.getElementById(
+    "buildLumber"
+).onclick = ()=>{
 
-    const price =
-    100 *
-    speedLevel;
+    if(!areaUnlocked){
+
+        message(
+            "Desbloqueie a nova área primeiro."
+        );
+
+        return;
+
+    }
+
+    if(lumberBuilt){
+
+        message(
+            "Você já tem uma serraria."
+        );
+
+        return;
+
+    }
 
     if(
-        money < price
+        wood < 30 ||
+        stone < 15 ||
+        money < 200
     ){
 
-        showMessage(
+        message(
+            "Precisa 30 madeira, 15 pedra e R$200."
+        );
+
+        return;
+
+    }
+
+    wood -= 30;
+    stone -= 15;
+    money -= 200;
+
+    lumberBuilt = true;
+
+    lumberX = 1900;
+    lumberY = 520;
+
+    createLumber();
+
+    addXP(30);
+
+    updateHUD();
+    saveGame(true);
+
+    message(
+        "🪵 Serraria construída!"
+    );
+
+};
+
+/* ======================
+PEDREIRA
+====================== */
+
+document.getElementById(
+    "buildQuarry"
+).onclick = ()=>{
+
+    if(!areaUnlocked){
+
+        message(
+            "Desbloqueie a nova área primeiro."
+        );
+
+        return;
+
+    }
+
+    if(quarryBuilt){
+
+        message(
+            "Você já tem uma pedreira."
+        );
+
+        return;
+
+    }
+
+    if(
+        wood < 25 ||
+        stone < 30 ||
+        money < 300
+    ){
+
+        message(
+            "Precisa 25 madeira, 30 pedra e R$300."
+        );
+
+        return;
+
+    }
+
+    wood -= 25;
+    stone -= 30;
+    money -= 300;
+
+    quarryBuilt = true;
+
+    quarryX = 2100;
+    quarryY = 760;
+
+    createQuarry();
+
+    addXP(35);
+
+    updateHUD();
+    saveGame(true);
+
+    message(
+        "⛏️ Pedreira construída!"
+    );
+
+};
+
+/* ======================
+UPGRADES
+====================== */
+
+document.getElementById(
+    "upgradeSpeed"
+).onclick = ()=>{
+
+    const price =
+    speedLevel * 100;
+
+    if(money < price){
+
+        message(
             "Dinheiro insuficiente."
         );
 
@@ -2289,35 +2267,20 @@ document
     speed += 30;
 
     updateHUD();
-
-    salvarJogo(true);
-
-    showMessage(
-        "🏃 Velocidade melhorada!"
-    );
+    saveGame(true);
 
 };
 
-/* =========================
-UPGRADE COLETA
-========================= */
-
-document
-.getElementById(
+document.getElementById(
     "upgradeCollect"
-)
-.onclick =
-()=>{
+).onclick = ()=>{
 
     const price =
-    150 *
-    collectLevel;
+    collectLevel * 150;
 
-    if(
-        money < price
-    ){
+    if(money < price){
 
-        showMessage(
+        message(
             "Dinheiro insuficiente."
         );
 
@@ -2332,74 +2295,21 @@ document
     collectAmount++;
 
     updateHUD();
-
-    salvarJogo(true);
-
-    showMessage(
-        "🪓 Coleta melhorada!"
-    );
+    saveGame(true);
 
 };
 
-/* =========================
-UPGRADE RENDA
-========================= */
+/* ======================
+SHOP
+====================== */
 
-document
-.getElementById(
-    "upgradeIncome"
-)
-.onclick =
-()=>{
-
-    const price =
-    200 *
-    incomeLevel;
-
-    if(
-        money < price
-    ){
-
-        showMessage(
-            "Dinheiro insuficiente."
-        );
-
-        return;
-
-    }
-
-    money -= price;
-
-    incomeLevel++;
-
-    hutIncome += 2;
-
-    updateHUD();
-
-    salvarJogo(true);
-
-    showMessage(
-        "💰 Produção melhorada!"
-    );
-
-};
-
-/* =========================
-LOJA
-========================= */
-
-document
-.getElementById(
+document.getElementById(
     "buyFood"
-)
-.onclick =
-()=>{
+).onclick = ()=>{
 
-    if(
-        money < 30
-    ){
+    if(money < 30){
 
-        showMessage(
+        message(
             "Dinheiro insuficiente."
         );
 
@@ -2408,31 +2318,20 @@ document
     }
 
     money -= 30;
-
     food += 5;
 
     updateHUD();
-
-    salvarJogo();
-
-    showMessage(
-        "+5 Comidas"
-    );
+    saveGame();
 
 };
 
-document
-.getElementById(
+document.getElementById(
     "buyWood"
-)
-.onclick =
-()=>{
+).onclick = ()=>{
 
-    if(
-        money < 50
-    ){
+    if(money < 50){
 
-        showMessage(
+        message(
             "Dinheiro insuficiente."
         );
 
@@ -2441,31 +2340,20 @@ document
     }
 
     money -= 50;
-
     wood += 10;
 
     updateHUD();
-
-    salvarJogo();
-
-    showMessage(
-        "+10 Madeira"
-    );
+    saveGame();
 
 };
 
-document
-.getElementById(
+document.getElementById(
     "buyStone"
-)
-.onclick =
-()=>{
+).onclick = ()=>{
 
-    if(
-        money < 60
-    ){
+    if(money < 60){
 
-        showMessage(
+        message(
             "Dinheiro insuficiente."
         );
 
@@ -2474,47 +2362,34 @@ document
     }
 
     money -= 60;
-
     stone += 10;
 
     updateHUD();
-
-    salvarJogo();
-
-    showMessage(
-        "+10 Pedra"
-    );
+    saveGame();
 
 };
 
-/* =========================
-COMER
-========================= */
+/* ======================
+FOOD
+====================== */
 
-document
-.getElementById(
+document.getElementById(
     "eatFood"
-)
-.onclick =
-()=>{
+).onclick = ()=>{
 
-    if(
-        food <= 0
-    ){
+    if(food <= 0){
 
-        showMessage(
-            "Você não possui comida."
+        message(
+            "Você não tem comida."
         );
 
         return;
 
     }
 
-    if(
-        hunger >= 95
-    ){
+    if(hunger >= 95){
 
-        showMessage(
+        message(
             "Você não está com fome."
         );
 
@@ -2526,377 +2401,312 @@ document
 
     hunger += 35;
 
-    if(
-        hunger > 100
-    ){
+    if(hunger > 100){
+        hunger = 100;
+    }
 
-        hunger =
-        100;
+    updateHUD();
+    saveGame();
+
+};
+
+/* ======================
+AUTOMATIC PRODUCTION
+====================== */
+
+setInterval(()=>{
+
+    if(hutBuilt){
+
+        money +=
+        getHutIncome();
 
     }
 
     updateHUD();
+    saveGame();
 
-    salvarJogo();
+},5000);
 
-    showMessage(
-        "🍖 Você comeu."
-    );
+setInterval(()=>{
 
-};
+    if(lumberBuilt){
 
-/* =========================
-FOME
-========================= */
+        wood++;
+
+        updateHUD();
+        saveGame();
+
+    }
+
+},8000);
+
+setInterval(()=>{
+
+    if(quarryBuilt){
+
+        stone++;
+
+        updateHUD();
+        saveGame();
+
+    }
+
+},10000);
 
 setInterval(()=>{
 
     hunger -= 2;
 
-    if(
-        hunger < 0
-    ){
-
-        hunger =
-        0;
-
-    }
-
-    if(
-        hunger <= 20
-    ){
-
-        showMessage(
-            "⚠️ Você está com fome!"
-        );
-
+    if(hunger < 0){
+        hunger = 0;
     }
 
     updateHUD();
-
-    salvarJogo();
 
 },10000);
 
-/* =========================
-RENDA
-========================= */
-
 setInterval(()=>{
 
-    if(
-        !hutBuilt
-    ){
-        return;
-    }
-
-    money +=
-    hutIncome;
-
-    updateHUD();
-
-    salvarJogo();
+    saveGame(true);
 
 },5000);
 
-/* =========================
-SAVE AUTOMÁTICO
-========================= */
-
-setInterval(()=>{
-
-    salvarJogo(true);
-
-},5000);
-
-window.addEventListener(
-"beforeunload",
-()=>{
-
-    salvarJogo();
-
-});
-
-/* =========================
-TECLADO
-========================= */
+/* ======================
+KEYBOARD
+====================== */
 
 const keys = {};
 
 window.addEventListener(
 "keydown",
-event=>{
+e=>{
 
     keys[
-        event.key
-        .toLowerCase()
-    ] =
-    true;
+        e.key.toLowerCase()
+    ] = true;
 
 });
 
 window.addEventListener(
 "keyup",
-event=>{
+e=>{
 
     keys[
-        event.key
-        .toLowerCase()
-    ] =
-    false;
+        e.key.toLowerCase()
+    ] = false;
 
 });
 
-/* =========================
+/* ======================
 JOYSTICK
-========================= */
+====================== */
 
-let joystickActive =
-false;
+const joystickBase =
+document.getElementById(
+    "joystickBase"
+);
 
-let joystickPointer =
-null;
+const joystickKnob =
+document.getElementById(
+    "joystickKnob"
+);
 
-function moveJoystick(
-clientX,
-clientY
-){
+let joystickActive = false;
+let joystickPointer = null;
+
+function moveJoystick(x,y){
 
     const rect =
     joystickBase
     .getBoundingClientRect();
 
-    const centerX =
+    const cx =
     rect.left +
-    rect.width / 2;
+    rect.width/2;
 
-    const centerY =
+    const cy =
     rect.top +
-    rect.height / 2;
+    rect.height/2;
 
     let dx =
-    clientX -
-    centerX;
+    x-cx;
 
     let dy =
-    clientY -
-    centerY;
+    y-cy;
 
     const max =
     42;
 
-    const distance =
-    Math.hypot(
-        dx,
-        dy
-    );
+    const d =
+    Math.hypot(dx,dy);
 
-    if(
-        distance >
-        max
-    ){
+    if(d > max){
 
         dx =
-        dx /
-        distance *
-        max;
+        dx/d*max;
 
         dy =
-        dy /
-        distance *
-        max;
+        dy/d*max;
 
     }
 
-    joystickKnob
-    .style
-    .transform =
+    joystickKnob.style.transform =
     `translate(${dx}px,${dy}px)`;
 
     inputX =
-    dx /
-    max;
+    dx/max;
 
     inputY =
-    dy /
-    max;
+    dy/max;
 
 }
 
-joystickBase
-.onpointerdown =
-event=>{
+joystickBase.onpointerdown =
+e=>{
 
-    joystickActive =
-    true;
+    joystickActive = true;
 
     joystickPointer =
-    event.pointerId;
+    e.pointerId;
 
     joystickBase
     .setPointerCapture(
-        event.pointerId
+        e.pointerId
     );
 
     moveJoystick(
-        event.clientX,
-        event.clientY
+        e.clientX,
+        e.clientY
     );
 
 };
 
-joystickBase
-.onpointermove =
-event=>{
+joystickBase.onpointermove =
+e=>{
 
-    if(
-        !joystickActive
-    ){
+    if(!joystickActive){
         return;
     }
 
     if(
-        event.pointerId !==
+        e.pointerId !==
         joystickPointer
     ){
         return;
     }
 
     moveJoystick(
-        event.clientX,
-        event.clientY
+        e.clientX,
+        e.clientY
     );
 
 };
 
 function stopJoystick(){
 
-    joystickActive =
-    false;
+    joystickActive = false;
 
-    joystickPointer =
-    null;
+    inputX = 0;
+    inputY = 0;
 
-    inputX =
-    0;
-
-    inputY =
-    0;
-
-    joystickKnob
-    .style
-    .transform =
-    "translate(0px,0px)";
+    joystickKnob.style.transform =
+    "translate(0,0)";
 
 }
 
-joystickBase
-.onpointerup =
+joystickBase.onpointerup =
 stopJoystick;
 
-joystickBase
-.onpointercancel =
+joystickBase.onpointercancel =
 stopJoystick;
 
-/* =========================
-CÂMERA
-========================= */
+/* ======================
+CAMERA
+====================== */
 
-function updateCamera(){
+function camera(){
 
-    let camX =
-    game.clientWidth /
-    2 -
+    let x =
+    game.clientWidth/2 -
     playerX -
     23;
 
-    let camY =
-    game.clientHeight /
-    2 -
+    let y =
+    game.clientHeight/2 -
     playerY -
     23;
 
-    camX =
+    x =
     Math.min(
         0,
         Math.max(
             game.clientWidth -
             WORLD_SIZE,
-            camX
+            x
         )
     );
 
-    camY =
+    y =
     Math.min(
         0,
         Math.max(
             game.clientHeight -
             WORLD_SIZE,
-            camY
+            y
         )
     );
 
     world.style.transform =
-    `translate(${camX}px,${camY}px)`;
+    `translate(${x}px,${y}px)`;
 
 }
 
-/* =========================
-MINIMAPA
-========================= */
+/* ======================
+MINIMAP
+====================== */
 
-function updateMiniMap(){
+function minimap(){
 
-    const percentX =
-    playerX /
-    WORLD_SIZE;
-
-    const percentY =
-    playerY /
-    WORLD_SIZE;
-
-    miniPlayer.style.left =
+    document.getElementById(
+        "miniPlayer"
+    ).style.left =
     (
-        percentX *
+        playerX /
+        WORLD_SIZE *
         100
-    ) + "%";
+    )+"%";
 
-    miniPlayer.style.top =
+    document.getElementById(
+        "miniPlayer"
+    ).style.top =
     (
-        percentY *
+        playerY /
+        WORLD_SIZE *
         100
-    ) + "%";
+    )+"%";
 
 }
 
-/* =========================
-LOOP
-========================= */
+/* ======================
+GAME LOOP
+====================== */
 
-function gameLoop(time){
+function loop(time){
 
     const delta =
     Math.min(
-        (
-            time -
-            lastTime
-        ) /
-        1000,
+        (time-lastTime)/1000,
         .05
     );
 
     lastTime =
     time;
 
-    if(
-        !joystickActive
-    ){
+    if(!joystickActive){
 
-        let x =
-        0;
-
-        let y =
-        0;
+        let x = 0;
+        let y = 0;
 
         if(
             keys["w"] ||
@@ -2926,33 +2736,19 @@ function gameLoop(time){
             x++;
         }
 
-        if(
-            x !== 0 ||
-            y !== 0
-        ){
+        if(x || y){
 
-            const length =
-            Math.hypot(
-                x,
-                y
-            );
+            const len =
+            Math.hypot(x,y);
 
-            inputX =
-            x /
-            length;
-
-            inputY =
-            y /
-            length;
+            inputX = x/len;
+            inputY = y/len;
 
         }
         else{
 
-            inputX =
-            0;
-
-            inputY =
-            0;
+            inputX = 0;
+            inputY = 0;
 
         }
 
@@ -2972,8 +2768,7 @@ function gameLoop(time){
     Math.max(
         0,
         Math.min(
-            WORLD_SIZE -
-            46,
+            WORLD_SIZE-46,
             playerX
         )
     );
@@ -2982,51 +2777,54 @@ function gameLoop(time){
     Math.max(
         0,
         Math.min(
-            WORLD_SIZE -
-            46,
+            WORLD_SIZE-46,
             playerY
         )
     );
 
     player.style.left =
-    playerX +
-    "px";
+    playerX+"px";
 
     player.style.top =
-    playerY +
-    "px";
+    playerY+"px";
 
-    updateCamera();
+    camera();
+    minimap();
+    nearUpdate();
 
-    updateMiniMap();
-
-    updateNearResource();
-
-    requestAnimationFrame(
-        gameLoop
-    );
+    requestAnimationFrame(loop);
 
 }
 
-/* =========================
-INICIAR
-========================= */
+/* ======================
+START
+====================== */
 
-carregarJogo();
+loadGame();
 
-criarBarracaVisual();
+updateArea();
+
+createHut();
+createLumber();
+createQuarry();
 
 updateHUD();
 
 player.style.left =
-playerX + "px";
+playerX+"px";
 
 player.style.top =
-playerY + "px";
+playerY+"px";
 
-requestAnimationFrame(
-    gameLoop
-);
+requestAnimationFrame(loop);
+
+window.addEventListener(
+"beforeunload",
+()=>{
+
+    saveGame();
+
+});
 
 </script>
 
